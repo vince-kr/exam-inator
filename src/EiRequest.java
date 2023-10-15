@@ -1,33 +1,53 @@
-import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class EiRequest {
 
     private final String requestHead;
-    private final ArrayList<EiMenuItem> menuItems;
-    private final Pattern matchResponse;
-    private String prompt;
+    private final EiMenu menu;
+    private final Pattern pattern;
+    private final String prompt;
 
     public EiRequest(
             String requestHead,
             String prompt,
-            ArrayList<EiMenuItem> menuItems,
-            Pattern matchResponse) {
+            EiMenu menu,
+            Pattern pattern) {
         this.requestHead = requestHead;
         this.prompt = prompt;
-        this.menuItems = menuItems;
-        this.matchResponse = matchResponse;
+        this.menu = menu;
+        this.pattern = pattern;
     }
 
-    public Pattern getMatchResponse() {
-        return matchResponse;
+    public EiRequest(
+            String requestHead,
+            String prompt,
+            Pattern pattern) {
+        this.requestHead = requestHead;
+        this.prompt = prompt;
+        this.menu = new EiMenu();
+        this.pattern = pattern;
+    }
+    public boolean hasMenu() {
+        return !menu.isEmpty();
+    }
+
+    public Pattern getPattern() {
+        return pattern;
+    }
+
+    public String getRequestHead() {
+        return requestHead;
+    }
+
+    public String getPrompt() {
+        return prompt;
+    }
+
+    public String getMenu() {
+        return menu.toString();
     }
 
     public String toString() {
-        StringBuilder menu = new StringBuilder();
-        for (EiMenuItem menuItem : menuItems) {
-            menu.append(menuItem.selector() + "\t" + menuItem.description() + "\n");
-        }
-        return this.requestHead + "\n\n" + menu + "\n" + this.prompt;
+        return this.requestHead + "\n\n" + this.menu + "\n" + this.prompt;
     }
 }
