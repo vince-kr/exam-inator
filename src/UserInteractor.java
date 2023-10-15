@@ -2,15 +2,23 @@ import java.util.HashMap;
 
 public class UserInteractor {
     private boolean isFinished;
-    private UserMenu nextMenu;
-    private HashMap<String, UserMenu> allMenus;
+    private EiRequest nextRequest;
+    private HashMap<String, EiRequest> allRequests;
+
+    public UserInteractor() {
+        this.allRequests = loadEiRequests();
+    }
+
+    private HashMap<String, EiRequest> loadEiRequests() {
+        HashMap<String, EiRequest> allRequests = null;
+        return allRequests;
+    }
 
     public boolean isFinished() {
         return isFinished;
     }
 
-    public void printNextMenu() {
-        System.out.println(nextMenu);
+    public void completeRequestResponseCycle() {
     }
 }
 
@@ -27,8 +35,8 @@ s   Load sample data
 - Required prompt asking for input e.g.
 Please enter the letter (case-insensitive) or number for your choice:
 
-- Some pattern that the user's response must match e.g.
-^[aldes1-9]$
+- Required pattern that the user's response must match e.g.
+^[aldes1-5]$
 The method will continue to ask the user for a response until it matches the pattern
 
 The RESPONSE consists of:

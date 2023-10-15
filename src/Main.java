@@ -4,7 +4,7 @@ public class Main {
 
         UserInteractor ui = new UserInteractor();
         while (!ui.isFinished()) {
-            ui.printNextMenu();
+            ui.completeRequestResponseCycle();
         }
     }
 }
