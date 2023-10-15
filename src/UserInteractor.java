@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -16,7 +15,7 @@ public class UserInteractor {
 
     private HashMap<String, EiRequest> loadEiRequests() {
         HashMap<String, EiRequest> allRequests = new HashMap<>();
-        ArrayList<EiMenuItem> mainMenu = new ArrayList<>() {
+        EiMenu mainMenu = new EiMenu() {
             {
                 add(new EiMenuItem("Add a student", 'a'));
                 add(new EiMenuItem("List all students", 'l'));
@@ -30,7 +29,13 @@ public class UserInteractor {
                 "Please enter the letter (case-insensitive) or number for your choice: ",
                 mainMenu,
                 Pattern.compile("^[aldes1-5]$", Pattern.CASE_INSENSITIVE)
-                ));
+        ));
+        allRequests.put("add-student", new EiRequest(
+                "ADD A STUDENT",
+                "Please enter the full name of a student." +
+                        "The name should be between 2 and 30 characters long: ",
+                Pattern.compile("^[a-zA-Z]{2,30}$")
+        ));
         return allRequests;
     }
 
@@ -41,11 +46,18 @@ public class UserInteractor {
     public void completeRequestResponseCycle() {
         Scanner userIn = new Scanner(System.in);
         Matcher matcher;
-        System.out.println(currentRequest);
-        do {
+        System.out.println(currentRequest.getRequestHead());
+        if (currentRequest.hasMenu())
+            System.out.println(currentRequest.getMenu());
+        do
+        {
+            System.out.println(currentRequest.getPrompt());
             String response = userIn.nextLine();
-            matcher = currentRequest.getMatchResponse().matcher(response);
-        } while (!matcher.find());
+            matcher = currentRequest.getPattern().matcher(response);
+            if (!matcher.matches())
+                System.out.println("That option is not valid. Please try again.");
+        } while (!matcher.matches());
+
     }
 }
 

@@ -11,6 +11,7 @@ public class Main {
         // Creating an ExamManagement instance exercises the system
         ExamManagement examManager = new ExamManagement();
         System.out.println("Done!");
+        System.out.println();
 
         // Create a UserInteractor to manage user interaction
         UserInteractor ui = new UserInteractor();
