@@ -1,16 +1,36 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserInteractor {
     private boolean isFinished;
-    private EiRequest nextRequest;
+    private EiRequest currentRequest;
     private HashMap<String, EiRequest> allRequests;
 
     public UserInteractor() {
-        this.allRequests = loadEiRequests();
+        allRequests = loadEiRequests();
+        currentRequest = allRequests.get("main");
     }
 
     private HashMap<String, EiRequest> loadEiRequests() {
-        HashMap<String, EiRequest> allRequests = null;
+        HashMap<String, EiRequest> allRequests = new HashMap<>();
+        ArrayList<EiMenuItem> mainMenu = new ArrayList<>() {
+            {
+                add(new EiMenuItem("Add a student", 'a'));
+                add(new EiMenuItem("List all students", 'l'));
+                add(new EiMenuItem("Display one student", 'd'));
+                add(new EiMenuItem("Store an exam result", 'e'));
+                add(new EiMenuItem("Load sample data", 's'));
+            }
+        };
+        allRequests.put("main", new EiRequest(
+                "MAIN MENU",
+                "Please enter the letter (case-insensitive) or number for your choice: ",
+                mainMenu,
+                Pattern.compile("^[aldes1-5]$", Pattern.CASE_INSENSITIVE)
+                ));
         return allRequests;
     }
 
@@ -19,6 +39,13 @@ public class UserInteractor {
     }
 
     public void completeRequestResponseCycle() {
+        Scanner userIn = new Scanner(System.in);
+        Matcher matcher;
+        System.out.println(currentRequest);
+        do {
+            String response = userIn.nextLine();
+            matcher = currentRequest.getMatchResponse().matcher(response);
+        } while (!matcher.find());
     }
 }
 
