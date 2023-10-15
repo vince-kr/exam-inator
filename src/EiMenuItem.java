@@ -1,1 +1,1 @@
-public record EiMenuItem(String description, char selector) {}
+public record EiMenuItem(String description, String selector) {}

@@ -15,19 +15,25 @@ public class UserInteractor {
 
     private HashMap<String, EiRequest> loadEiRequests() {
         HashMap<String, EiRequest> allRequests = new HashMap<>();
+
         EiMenu mainMenu = new EiMenu() {
             {
-                add(new EiMenuItem("Add a student", 'a'));
-                add(new EiMenuItem("List all students", 'l'));
-                add(new EiMenuItem("Display one student", 'd'));
-                add(new EiMenuItem("Store an exam result", 'e'));
-                add(new EiMenuItem("Load sample data", 's'));
+                add(new EiMenuItem("Add a student", "a"));
+                add(new EiMenuItem("List all students", "l"));
+                add(new EiMenuItem("Display one student", "d"));
+                add(new EiMenuItem("Store an exam result", "e"));
+                add(new EiMenuItem("Load sample data", "s"));
             }
         };
+
+        HashMap<String, String> forward = new HashMap<>();
+        forward.put("a", "add-student");
+
         allRequests.put("main", new EiRequest(
                 "MAIN MENU",
                 "Please enter the letter (case-insensitive) or number for your choice: ",
                 mainMenu,
+                forward,
                 Pattern.compile("^[aldes1-5]$", Pattern.CASE_INSENSITIVE)
         ));
         allRequests.put("add-student", new EiRequest(
@@ -36,6 +42,7 @@ public class UserInteractor {
                         "The name should be between 2 and 30 characters long: ",
                 Pattern.compile("^[a-zA-Z]{2,30}$")
         ));
+
         return allRequests;
     }
 
@@ -45,6 +52,7 @@ public class UserInteractor {
 
     public void completeRequestResponseCycle() {
         Scanner userIn = new Scanner(System.in);
+        String response;
         Matcher matcher;
         System.out.println(currentRequest.getRequestHead());
         if (currentRequest.hasMenu())
@@ -52,12 +60,12 @@ public class UserInteractor {
         do
         {
             System.out.println(currentRequest.getPrompt());
-            String response = userIn.nextLine();
+            response = userIn.nextLine();
             matcher = currentRequest.getPattern().matcher(response);
             if (!matcher.matches())
                 System.out.println("That option is not valid. Please try again.");
         } while (!matcher.matches());
-
+        this.currentRequest = allRequests.get(currentRequest.getForward().get(response));
     }
 }
 

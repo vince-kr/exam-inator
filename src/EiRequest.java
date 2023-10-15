@@ -1,20 +1,24 @@
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class EiRequest {
 
     private final String requestHead;
-    private final EiMenu menu;
-    private final Pattern pattern;
     private final String prompt;
+    private final EiMenu menu;
+    private final HashMap<String, String> forward;
+    private final Pattern pattern;
 
     public EiRequest(
             String requestHead,
             String prompt,
             EiMenu menu,
+            HashMap<String, String> forward,
             Pattern pattern) {
         this.requestHead = requestHead;
         this.prompt = prompt;
         this.menu = menu;
+        this.forward = forward;
         this.pattern = pattern;
     }
 
@@ -25,6 +29,7 @@ public class EiRequest {
         this.requestHead = requestHead;
         this.prompt = prompt;
         this.menu = new EiMenu();
+        this.forward = new HashMap<>();
         this.pattern = pattern;
     }
     public boolean hasMenu() {
@@ -45,6 +50,10 @@ public class EiRequest {
 
     public String getMenu() {
         return menu.toString();
+    }
+
+    public HashMap<String, String> getForward() {
+        return forward;
     }
 
     public String toString() {
