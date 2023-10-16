@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class EiMenu extends ArrayList<EiMenuItem> {
+class EiMenu extends ArrayList<EiMenuItem> {
     public String toString() {
         StringBuilder menu = new StringBuilder();
         for (EiMenuItem menuItem : this) {
@@ -10,3 +10,5 @@ public class EiMenu extends ArrayList<EiMenuItem> {
         return menu.toString();
     }
 }
+
+record EiMenuItem(String description, String selector) {}
