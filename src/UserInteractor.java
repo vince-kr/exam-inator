@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class UserInteractor {
+class UserInteractor {
     private boolean isFinished;
     private EiRequest currentRequest;
     private HashMap<String, EiRequest> allRequests;
@@ -11,6 +11,36 @@ public class UserInteractor {
     public UserInteractor() {
         allRequests = loadEiRequests();
         currentRequest = allRequests.get("main");
+    }
+
+    public void completeRequestResponseCycle() {
+        String response;
+        System.out.println(currentRequest.getRequestHead());
+        if (currentRequest.hasMenu())
+            System.out.println(currentRequest.getMenu());
+        if (currentRequest.hasPrompt()) {
+            response = getValidResponse(currentRequest.getPrompt());
+            this.currentRequest = allRequests.get(currentRequest.getForward().get(response));
+        } else {
+            this.currentRequest = allRequests.get(currentRequest.getParent());
+        }
+    }
+
+    private String getValidResponse(String prompt) {
+        Scanner userIn = new Scanner(System.in);
+        Matcher matcher;
+
+        System.out.print(prompt);
+        String response = userIn.nextLine();
+        matcher = currentRequest.getPattern().matcher(response);
+
+        while (!matcher.matches()) {
+            System.out.println("That option is not valid. Please try again.");
+            System.out.print(prompt);
+            response = userIn.nextLine();
+            matcher = currentRequest.getPattern().matcher(response);
+        }
+        return response;
     }
 
     private HashMap<String, EiRequest> loadEiRequests() {
@@ -28,19 +58,26 @@ public class UserInteractor {
 
         HashMap<String, String> forward = new HashMap<>();
         forward.put("a", "add-student");
+        forward.put("l", "list-students");
 
         allRequests.put("main", new EiRequest(
                 "MAIN MENU",
                 "Please enter the letter (case-insensitive) or number for your choice: ",
                 mainMenu,
                 forward,
+                "main",
                 Pattern.compile("^[aldes1-5]$", Pattern.CASE_INSENSITIVE)
         ));
         allRequests.put("add-student", new EiRequest(
                 "ADD A STUDENT",
                 "Please enter the full name of a student." +
                         "The name should be between 2 and 30 characters long: ",
-                Pattern.compile("^[a-zA-Z]{2,30}$")
+                "main",
+                Pattern.compile("^[a-zA-Z ]{2,30}$")
+        ));
+        allRequests.put("list-students", new EiRequest(
+                "LIST ALL STUDENTS",
+                "main"
         ));
 
         return allRequests;
@@ -48,24 +85,6 @@ public class UserInteractor {
 
     public boolean isFinished() {
         return isFinished;
-    }
-
-    public void completeRequestResponseCycle() {
-        Scanner userIn = new Scanner(System.in);
-        String response;
-        Matcher matcher;
-        System.out.println(currentRequest.getRequestHead());
-        if (currentRequest.hasMenu())
-            System.out.println(currentRequest.getMenu());
-        do
-        {
-            System.out.println(currentRequest.getPrompt());
-            response = userIn.nextLine();
-            matcher = currentRequest.getPattern().matcher(response);
-            if (!matcher.matches())
-                System.out.println("That option is not valid. Please try again.");
-        } while (!matcher.matches());
-        this.currentRequest = allRequests.get(currentRequest.getForward().get(response));
     }
 }
 
