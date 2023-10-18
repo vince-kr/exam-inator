@@ -60,7 +60,7 @@ class UserInteractor {
         forward.put("a", "add-student");
         forward.put("l", "list-students");
 
-        allRequests.put("main", new EiRequest(
+        allRequests.put("main", new EiMenuSelection(
                 "MAIN MENU",
                 "Please enter the letter (case-insensitive) or number for your choice: ",
                 mainMenu,
@@ -68,14 +68,14 @@ class UserInteractor {
                 "main",
                 Pattern.compile("^[aldes1-5]$", Pattern.CASE_INSENSITIVE)
         ));
-        allRequests.put("add-student", new EiRequest(
+        allRequests.put("add-student", new EiDataInput(
                 "ADD A STUDENT",
                 "Please enter the full name of a student." +
                         "The name should be between 2 and 30 characters long: ",
                 "main",
                 Pattern.compile("^[a-zA-Z ]{2,30}$")
         ));
-        allRequests.put("list-students", new EiRequest(
+        allRequests.put("list-students", new EiDataOutput(
                 "LIST ALL STUDENTS",
                 "main"
         ));
