@@ -14,54 +14,13 @@ There are different types of requests!
 INHERITAAANCE
  */
 
-class EiRequest {
-
-    private final String requestHead;
-    private final String prompt;
-    private final EiMenu menu;
-    private final HashMap<String, String> forward;
-    private final String parent;
-    private final Pattern pattern;
-
-    public EiRequest(
-            String requestHead,
-            String prompt,
-            EiMenu menu,
-            HashMap<String, String> forward,
-            String parent,
-            Pattern pattern) {
-        this.requestHead = requestHead;
-        this.prompt = prompt;
-        this.menu = menu;
-        this.forward = forward;
-        this.parent = parent;
-        this.pattern = pattern;
-    }
-
-    public EiRequest(
-            String requestHead,
-            String prompt,
-            String parent,
-            Pattern pattern) {
-        this.requestHead = requestHead;
-        this.prompt = prompt;
-        this.menu = new EiMenu();
-        this.forward = new HashMap<>();
-        this.parent = parent;
-        this.pattern = pattern;
-    }
-
-    public EiRequest(
-            String requestHead,
-            String parent
-            ) {
-        this.requestHead = requestHead;
-        this.prompt = "";
-        this.menu = new EiMenu();
-        this.forward = new HashMap<>();
-        this.parent = parent;
-        this.pattern = Pattern.compile("");
-    }
+abstract class EiRequest {
+    String requestHead;
+    String prompt;
+    EiMenu menu;
+    HashMap<String, String> forward;
+    String parent;
+    Pattern pattern;
 
     public boolean hasMenu() {
         return !menu.isEmpty();
