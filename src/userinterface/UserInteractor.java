@@ -1,29 +1,25 @@
+package userinterface;
+
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class UserInteractor {
+public class UserInteractor {
+    private Interaction currentInteraction;
+    private HashMap<String, Interaction> allInteractions;
     private boolean isFinished;
-    private EiRequest currentRequest;
-    private HashMap<String, EiRequest> allRequests;
 
     public UserInteractor() {
-        allRequests = loadEiRequests();
-        currentRequest = allRequests.get("main");
+        allInteractions = loadInteractions();
+        currentInteraction = allInteractions.get("main");
     }
 
-    public void completeRequestResponseCycle() {
-        String response;
-        System.out.println(currentRequest.getRequestHead());
-        if (currentRequest.hasMenu())
-            System.out.println(currentRequest.getMenu());
-        if (currentRequest.hasPrompt()) {
-            response = getValidResponse(currentRequest.getPrompt());
-            this.currentRequest = allRequests.get(currentRequest.getForward().get(response));
-        } else {
-            this.currentRequest = allRequests.get(currentRequest.getParent());
-        }
+    public void completeInteractionCycle() {
+        Response response = currentInteraction.transmitAndReceive();
+        String nextInteractionReference = response.getNextInteraction();
+        currentInteraction = allInteractions.get(nextInteractionReference);
+        isFinished = response.getFinished();
     }
 
     private String getValidResponse(String prompt) {
@@ -32,19 +28,21 @@ class UserInteractor {
 
         System.out.print(prompt);
         String response = userIn.nextLine();
-        matcher = currentRequest.getPattern().matcher(response);
+        /*
+        matcher = currentInteraction.getPattern().matcher(response);
 
         while (!matcher.matches()) {
             System.out.println("That option is not valid. Please try again.");
             System.out.print(prompt);
             response = userIn.nextLine();
-            matcher = currentRequest.getPattern().matcher(response);
+            matcher = currentInteraction.getPattern().matcher(response);
         }
+         */
         return response;
     }
 
-    private HashMap<String, EiRequest> loadEiRequests() {
-        HashMap<String, EiRequest> allRequests = new HashMap<>();
+    private HashMap<String, Interaction> loadInteractions() {
+        HashMap<String, Interaction> allRequests = new HashMap<>();
 
         EiMenu mainMenu = new EiMenu() {
             {
@@ -60,6 +58,7 @@ class UserInteractor {
         forward.put("a", "add-student");
         forward.put("l", "list-students");
 
+        /*
         allRequests.put("main", new EiMenuSelection(
                 "MAIN MENU",
                 "Please enter the letter (case-insensitive) or number for your choice: ",
@@ -77,13 +76,14 @@ class UserInteractor {
         ));
         allRequests.put("list-students", new EiDataOutput(
                 "LIST ALL STUDENTS",
-                "main"
+                allRequests.get("main")
         ));
+         */
 
         return allRequests;
     }
 
-    public boolean isFinished() {
+    public boolean userIsFinished() {
         return isFinished;
     }
 }

@@ -1,3 +1,5 @@
+import userinterface.UserInteractor;
+
 public class Main {
     public static void main(String[] args) {
         String banner = """
@@ -13,10 +15,12 @@ public class Main {
         System.out.println("Done!");
         System.out.println();
 
+        /*
         // Create a UserInteractor to manage user interaction
         UserInteractor ui = new UserInteractor();
-        while (!ui.isFinished()) {
-            ui.completeRequestResponseCycle();
+        while (!ui.userIsFinished()) {
+            ui.completeInteractionCycle();
         }
+         */
     }
 }

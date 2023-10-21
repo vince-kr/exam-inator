@@ -1,3 +1,5 @@
+package userinterface;
+
 import java.util.ArrayList;
 
 class EiMenu extends ArrayList<EiMenuItem> {
