@@ -56,7 +56,7 @@ public class Essay extends Exam implements Scorable {
     }
 
     public String displayExamDetails() {
-        return String.format("EXAM DETAILS\n\tSubject:\t %s\n\tDuration:\t %d\n\t", this.subject, this.duration);
+        return String.format("ESSAY DETAILS\n\tSubject:\t %s\n\tDuration:\t %d\n\t", this.subject, this.duration);
     }
 
     @Override

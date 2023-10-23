@@ -1,8 +1,8 @@
 package system.exam;
 
 public class MultipleChoice extends Exam implements Scorable {
-    private int correctAnswers;
-    private int noQuestions;
+    private final int correctAnswers;
+    private final int noQuestions;
 
     public MultipleChoice(
             int examId,
@@ -22,8 +22,8 @@ public class MultipleChoice extends Exam implements Scorable {
         this.noQuestions = noQuestions;
     }
 
-    String displayExamDetails() {
-        return "Hello, world!";
+    public String displayExamDetails() {
+        return String.format("MULTIPLE CHOICE DETAILS\n\tSubject:\t %s \n\tDuration:\t %d", this.subject, this.duration);
     }
 
     @Override
