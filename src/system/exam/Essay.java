@@ -1,20 +1,34 @@
-package system;
+package system.exam;
 
 import java.util.StringTokenizer;
 
-public class Essay extends exam implements Scorable {
+public class Essay extends Exam implements Scorable {
     String essayAnswer;
+    int wordCount;
     int grammar;
     int content;
     int wordLimit;
 
-    public Essay(String subject, int duration, String essayAnswer, int grammar, int content, int wordLimit) {
-        this.subject = subject;
-        this.duration = duration;
+    public Essay(
+            int examId,
+            String subject,
+            int duration,
+            String essayAnswer,
+            int grammar,
+            int content,
+            int wordLimit) throws ExamException {
+        super(examId, subject, duration);
+        this.wordCount = new StringTokenizer(essayAnswer).countTokens();
+        if (wordCount < 0) {
+            throw new ExamException("Word count must be greater than zero!");
+        }
         this.essayAnswer = essayAnswer;
         this.grammar = grammar;
         this.content = content;
         this.wordLimit = wordLimit;
+        if (wordLimit < 500 || wordLimit > 10000) {
+            throw new ExamException("Word limit must be between 500 and 10,000!");
+        }
     }
 
     private int gradeEssay() {
@@ -30,7 +44,6 @@ public class Essay extends exam implements Scorable {
         // Bounds 10% above and below the word limit
         double wordLimitUpper = wordLimit * 1.1;
         double wordLimitLower = wordLimit * 0.9;
-        int wordCount = new StringTokenizer(essayAnswer).countTokens();
 
         // Penalise too few words by 20% and too many words by 5%
         if (wordCount < wordLimitLower) {
