@@ -1,8 +1,5 @@
 package userinterface;
 
-import userinterface.reqresdefinitions.EiMenu;
-import userinterface.reqresdefinitions.EiMenuItem;
-
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -19,9 +16,11 @@ public class UserInteractor {
 
     public void completeInteractionCycle() {
         Response response = currentInteraction.transmitAndReceive();
+        /*
         String nextInteractionReference = response.getNextInteraction();
         currentInteraction = allInteractions.get(nextInteractionReference);
         isFinished = response.getFinished();
+         */
     }
 
     private String getValidResponse(String prompt) {

@@ -1,10 +1,13 @@
 import system.exam.Essay;
 import system.exam.ExamException;
 import system.exam.MultipleChoice;
+import system.student.Student;
+import system.student.StudentException;
 
 class ExamManagement {
     Essay testOne;
     MultipleChoice testTwo;
+    Student testStudent;
 
     public ExamManagement() {
         try {
@@ -20,6 +23,7 @@ class ExamManagement {
         } catch (ExamException ee) {
             System.out.println("ERROR - " + ee.getMessage());
         }
+
         try {
             testTwo = new MultipleChoice(
                     5,
@@ -31,7 +35,16 @@ class ExamManagement {
         } catch (ExamException ee) {
             System.out.println("ERROR - " + ee.getMessage());
         }
+
+        try {
+            testStudent = new Student(42, "Vince");
+        } catch (StudentException se) {
+            System.out.println("ERROR - " + se.getMessage());
+        }
+
         System.out.println(testOne.displayExamDetails());
         System.out.println(testTwo.displayExamDetails());
+
+        System.out.println(testStudent.printSummaryResult());
     }
 }

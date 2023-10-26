@@ -1,6 +1,6 @@
 package system.exam;
 
-abstract class Exam {
+public abstract class Exam implements Scorable {
     int examId;
     String subject;
     int duration;
@@ -12,5 +12,13 @@ abstract class Exam {
         this.examId = examId;
         this.subject = subject;
         this.duration = duration;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public int getDuration() {
+        return duration;
     }
 }
