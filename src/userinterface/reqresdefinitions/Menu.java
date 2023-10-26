@@ -1,11 +1,11 @@
-package userinterface;
+package userinterface.reqresdefinitions;
 
 import java.util.ArrayList;
 
-class EiMenu extends ArrayList<EiMenuItem> {
+class Menu extends ArrayList<MenuItem> {
     public String toString() {
         StringBuilder menu = new StringBuilder();
-        for (EiMenuItem menuItem : this) {
+        for (MenuItem menuItem : this) {
             String fmtItem = menuItem.selector() + "\t" + menuItem.description() + "\n";
             menu.append(fmtItem);
         }
@@ -13,4 +13,4 @@ class EiMenu extends ArrayList<EiMenuItem> {
     }
 }
 
-record EiMenuItem(String description, String selector) {}
+record MenuItem(String description, String selector) {}
