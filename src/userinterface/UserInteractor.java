@@ -1,9 +1,11 @@
 package userinterface;
 
+import userinterface.reqresdefinitions.EiMenu;
+import userinterface.reqresdefinitions.EiMenuItem;
+
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class UserInteractor {
     private Interaction currentInteraction;
@@ -44,15 +46,6 @@ public class UserInteractor {
     private HashMap<String, Interaction> loadInteractions() {
         HashMap<String, Interaction> allRequests = new HashMap<>();
 
-        EiMenu mainMenu = new EiMenu() {
-            {
-                add(new EiMenuItem("Add a student", "a"));
-                add(new EiMenuItem("List all students", "l"));
-                add(new EiMenuItem("Display one student", "d"));
-                add(new EiMenuItem("Store an exam result", "e"));
-                add(new EiMenuItem("Load sample data", "s"));
-            }
-        };
 
         HashMap<String, String> forward = new HashMap<>();
         forward.put("a", "add-student");

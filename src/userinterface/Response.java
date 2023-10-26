@@ -1,14 +1,10 @@
 package userinterface;
 
-public abstract class Response {
-    private String nextInteraction;
-    private boolean finished;
-
-    String getNextInteraction() {
-        return nextInteraction;
+public record Response (String nextInteraction, boolean finished) {
+    public Response(String nextInteraction) {
+        this(nextInteraction, false);
     }
-
-    boolean getFinished() {
-        return finished;
+    public Response() {
+        this("main", false);
     }
 }
