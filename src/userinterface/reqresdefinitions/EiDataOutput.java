@@ -1,4 +1,4 @@
-package userinterface;
+package userinterface.reqresdefinitions;
 
 class EiDataOutput {
     public EiDataOutput() {}

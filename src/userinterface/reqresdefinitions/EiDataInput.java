@@ -1,4 +1,7 @@
-package userinterface;
+package userinterface.reqresdefinitions;
+
+import userinterface.Interaction;
+import userinterface.Response;
 
 import java.util.regex.Pattern;
 
