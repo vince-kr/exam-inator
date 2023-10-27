@@ -16,9 +16,8 @@ public class ExamResult implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        if (!(o instanceof ExamResult)) {
+        if (!(o instanceof ExamResult))
             return 0;
-        }
         ExamResult other = (ExamResult) o;
         return this.score - other.score;
     }

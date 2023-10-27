@@ -14,7 +14,7 @@ public abstract class Exam implements Scorable {
         this.duration = duration;
     }
 
-    public String getSubject() {
+    public String toString() {
         return subject;
     }
 

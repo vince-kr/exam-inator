@@ -26,7 +26,7 @@ public class Student implements Printable {
         summaryResult.append(studentSummary());
         summaryResult.append(examsTaken.size() + "\n");
         for (Exam exam : examsTaken) {
-            summaryResult.append(exam.getSubject() + "\t" + exam.calculateScore() + "\n");
+            summaryResult.append(exam + "\t" + exam.calculateScore() + "\n");
         }
         return summaryResult.toString();
     }
