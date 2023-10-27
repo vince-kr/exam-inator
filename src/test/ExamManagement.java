@@ -1,3 +1,5 @@
+package test;
+
 import system.exam.Essay;
 import system.exam.Exam;
 import system.exam.ExamException;
@@ -7,9 +9,8 @@ import system.student.StudentException;
 import util.io.Files;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-class ExamManagement {
+public class ExamManagement {
     Essay testOne;
     MultipleChoice testTwo;
     Student testStudent;
@@ -68,5 +69,27 @@ class ExamManagement {
         String delim = "=====";
         String essayAnswers = Files.readAsset("essay_answers.txt");
         return essayAnswers.split(delim);
+    }
+
+    private EssayDefinition[] loadEssayExams() {
+        String rawEssayDefinitions = Files.readAsset("essay_defs.csv");
+        String[] edLines = rawEssayDefinitions.split("\n");
+        int countEdValues = edLines.length;
+
+        EssayDefinition[] edRecords = new EssayDefinition[countEdValues];
+
+        for (int i = 0; i < countEdValues; i++) {
+            String[] edValues = edLines[i].split(",");
+            int examId = Integer.parseInt(edValues[0]);
+            String subject = edValues[1];
+            int duration = Integer.parseInt(edValues[2]);
+            String essayAnswer = edValues[3];
+            int grammar = Integer.parseInt(edValues[4]);
+            int content = Integer.parseInt(edValues[5]);
+            int wordLimit = Integer.parseInt(edValues[6]);
+            edRecords[i] = new EssayDefinition(examId, subject, duration, essayAnswer, grammar, content, wordLimit);
+        }
+
+        return edRecords;
     }
 }
