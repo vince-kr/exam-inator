@@ -1,4 +1,4 @@
-package system.exam;
+package examinator.exam;
 
 import java.util.StringTokenizer;
 

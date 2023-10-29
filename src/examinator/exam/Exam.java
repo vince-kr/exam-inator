@@ -1,6 +1,6 @@
-package system.exam;
+package examinator.exam;
 
-public abstract class Exam implements Scorable {
+abstract class Exam implements Scorable {
     int examId;
     String subject;
     int duration;
@@ -14,11 +14,11 @@ public abstract class Exam implements Scorable {
         this.duration = duration;
     }
 
-    public String toString() {
-        return subject;
-    }
-
     public int getDuration() {
         return duration;
+    }
+
+    public String toString() {
+        return subject;
     }
 }

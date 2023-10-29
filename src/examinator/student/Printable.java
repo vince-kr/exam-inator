@@ -1,4 +1,4 @@
-package system.student;
+package examinator.student;
 
 public interface Printable {
     String printSummaryResult();

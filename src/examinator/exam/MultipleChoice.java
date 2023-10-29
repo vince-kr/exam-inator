@@ -1,4 +1,4 @@
-package system.exam;
+package examinator.exam;
 
 public class MultipleChoice extends Exam implements Scorable {
     private final int correctAnswers;
@@ -13,7 +13,7 @@ public class MultipleChoice extends Exam implements Scorable {
     ) throws ExamException {
         super(examId, subject, duration);
         if (correctAnswers < 0) {
-            throw new ExamException("Correct answers cannot be negative!");
+            throw new ExamException("Number of correct answers cannot be negative!");
         }
         if (noQuestions < 10 || noQuestions > 50) {
             throw new ExamException("Number of questions must be between 10 and 50!");

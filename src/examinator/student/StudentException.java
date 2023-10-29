@@ -1,4 +1,4 @@
-package system.student;
+package examinator.student;
 
 public class StudentException extends Exception {
     public StudentException(String message) {

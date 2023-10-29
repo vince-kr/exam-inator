@@ -1,4 +1,4 @@
-import test.ExamManagement;
+import examinator.manager.ExamManagement;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,13 +1,13 @@
-package system.student;
+package examinator.student;
 
-import system.exam.Exam;
+import examinator.exam.Scorable;
 
 import java.util.ArrayList;
 
 public class Student implements Printable {
     int studentId;
     String studentName;
-    ArrayList<Exam> examsTaken = new ArrayList<>();
+    ArrayList<Scorable> examsTaken = new ArrayList<>();
 
     public Student(int studentId, String studentName) throws StudentException {
         if (studentName.length() < 2 || studentName.length() > 30) {
@@ -18,6 +18,14 @@ public class Student implements Printable {
         this.studentName = studentName;
     }
 
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
     @Override
     public String printSummaryResult() {
         // Introduce the student, then:
@@ -25,7 +33,7 @@ public class Student implements Printable {
         StringBuilder summaryResult = new StringBuilder();
         summaryResult.append(studentSummary());
         summaryResult.append(examsTaken.size() + "\n");
-        for (Exam exam : examsTaken) {
+        for (Scorable exam : examsTaken) {
             summaryResult.append(exam + "\t" + exam.calculateScore() + "\n");
         }
         return summaryResult.toString();
@@ -39,12 +47,14 @@ public class Student implements Printable {
     }
 
     private String studentSummary() {
-        StringBuilder studentSummary = new StringBuilder();
         String delim = "----------------------------------------------------------------\n";
-        studentSummary.append(delim);
-        studentSummary.append("\tName: " + String.format("%1$-" + 36 + "s", studentName));
-        studentSummary.append("ID: " + studentId + "\n");
-        studentSummary.append(delim);
-        return studentSummary.toString();
+        return delim +
+                "\tName: " + String.format("%1$-" + 36 + "s", studentName) +
+                "ID: " + studentId + "\n" +
+                delim;
+    }
+
+    public String toString() {
+        return this.printSummaryResult();
     }
 }
