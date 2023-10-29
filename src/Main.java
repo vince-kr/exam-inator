@@ -1,4 +1,5 @@
 import examinator.manager.ExamManagement;
+import examinator.manager.interact.UserInteractor;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,12 +16,10 @@ public class Main {
         System.out.println("Done!");
         System.out.println();
 
-        /*
         // Create a UserInteractor to manage user interaction
-        UserInteractor ui = new UserInteractor();
+        UserInteractor ui = examManager.createUserInteractor();
         while (!ui.userIsFinished()) {
             ui.completeInteractionCycle();
         }
-         */
     }
 }

@@ -5,6 +5,7 @@ import examinator.exam.Essay;
 import examinator.exam.ExamException;
 import examinator.exam.MultipleChoice;
 import examinator.exam.Scorable;
+import examinator.manager.interact.UserInteractor;
 import examinator.student.Student;
 import examinator.student.StudentException;
 import util.io.Files;
@@ -30,17 +31,19 @@ public class ExamManagement {
             testResults.add(new ExamResult(student, exam, exam.calculateScore()));
         }
 
+        // Print the exam results
         for (ExamResult result : testResults) {
             System.out.println(result);
         }
     }
 
     private ArrayList<Scorable> loadTestExams() {
+        // Helper method to create five Exam objects
         ArrayList<Scorable> testExams = new ArrayList<>();
 
         try {
             testExams.add(new Essay(
-                    4, "Software dev", 90, loadShortEssayAnswer(), 96, 94, 500
+                    4, "Software dev", 90, loadEssayAnswer("short"), 96, 94, 500
             ));
             testExams.add(new MultipleChoice(
                     5, "Bird quiz", 60, 12, 15
@@ -50,7 +53,7 @@ public class ExamManagement {
             testExams.add(new MultipleChoice(
                     13, "Algorithms", 120, 9, 50));
             testExams.add(new Essay(
-                    14, "Structural modelling", 60, loadLongEssayAnswer(), 72, 89, 1000));
+                    14, "Structural modelling", 60, loadEssayAnswer("long"), 72, 89, 1000));
         } catch (ExamException ee) {
             System.out.println("ERROR - " + ee.getMessage());
         }
@@ -58,15 +61,13 @@ public class ExamManagement {
         return testExams;
     }
 
-    private String loadShortEssayAnswer() {
-        return Files.readAsset("short_essay.txt");
-    }
-
-    private String loadLongEssayAnswer() {
-        return Files.readAsset("long_essay.txt");
+    private String loadEssayAnswer(String type) {
+        // Helper method to load essay answers from persistence
+        return Files.readAsset(type + "_essay.txt");
     }
 
     private ArrayList<Student> loadTestStudents() {
+        // Helper method to create three Student objects
         ArrayList<Student> testStudents = new ArrayList<>();
 
         try {
@@ -78,5 +79,9 @@ public class ExamManagement {
         }
 
         return testStudents;
+    }
+
+    public UserInteractor createUserInteractor() {
+        return new UserInteractor();
     }
 }
