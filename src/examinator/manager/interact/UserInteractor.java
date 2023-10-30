@@ -1,6 +1,6 @@
 package examinator.manager.interact;
 
-import examinator.manager.interact.reqresdef.GetStudentID;
+import examinator.manager.interact.reqresdef.AddStudent;
 import examinator.manager.interact.reqresdef.MainMenu;
 import examinator.manager.interact.reqresdef.RecordExamResult;
 
@@ -27,7 +27,7 @@ public class UserInteractor {
 
         allRequests.put("main", new MainMenu());
         allRequests.put("record-exam-result", new RecordExamResult());
-        allRequests.put("add-student-1", new GetStudentID());
+        allRequests.put("add-student", new AddStudent());
 
         return allRequests;
     }

@@ -1,12 +1,14 @@
 package examinator.manager.interact.reqresdef;
 
 import examinator.manager.interact.Interaction;
-import java.util.Scanner;
+
+import static examinator.manager.interact.reqresdef.Validator.getValidInput;
 
 public class MainMenu implements Interaction {
     String header = "MAIN MENU\n";
     Menu menuOptions = new Menu();
     String prompt = "Please enter the letter or number of your choice: ";
+    String responsePattern = "^[ae12]$";
 
     public MainMenu() {
         menuOptions.add(new MenuItem("Add a student", "a"));
@@ -18,7 +20,7 @@ public class MainMenu implements Interaction {
         System.out.println(header);
         System.out.println(menuOptions);
 
-        String userInput = getValidInput(prompt);
+        String userInput = getValidInput(prompt, responsePattern);
 
         return switch (userInput) {
             case "a", "1" ->
@@ -28,19 +30,5 @@ public class MainMenu implements Interaction {
             default ->
                     null;
         };
-    }
-
-    private static String getValidInput(String prompt) {
-        Scanner userIn = new Scanner(System.in);
-        String responsePattern = "^[ae12]$";
-
-        System.out.print(prompt);
-        String userInput = userIn.nextLine();
-        while (!userInput.matches(responsePattern)) {
-            System.out.println("WARNING - " + userInput + " is not valid!");
-            System.out.println(prompt);
-            userInput = userIn.nextLine();
-        }
-        return userInput;
     }
 }
