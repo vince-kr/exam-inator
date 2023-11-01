@@ -1,26 +1,41 @@
 package examinator.manager;
 
 import examinator.ExamResult;
-import examinator.exam.Essay;
-import examinator.exam.ExamException;
-import examinator.exam.MultipleChoice;
 import examinator.exam.Scorable;
-import examinator.manager.interact.UserInteractor;
+import examinator.manager.interact.Interaction;
+import examinator.manager.interact.reqresdef.AddStudent;
+import examinator.manager.interact.reqresdef.MainMenu;
+import examinator.manager.interact.reqresdef.RecordExamResult;
 import examinator.student.Student;
-import examinator.student.StudentException;
-import util.io.Files;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static examinator.manager.TestObjectGenerator.*;
 
 public class ExamManagement {
     ArrayList<Scorable> allExams = new ArrayList<>();
     ArrayList<Student> allStudents = new ArrayList<>();
+    private Interaction currentInteraction;
+    private final HashMap<String, Interaction> allInteractions;
+    boolean isFinished;
 
     public ExamManagement() {
-        // Create ArrayLists of students, exams, and exam results
+        allInteractions = loadInteractions();
+        currentInteraction = allInteractions.get("main");
+    }
 
+    private HashMap<String, Interaction> loadInteractions() {
+        HashMap<String, Interaction> allRequests = new HashMap<>();
+
+        allRequests.put("main", new MainMenu());
+        allRequests.put("record-exam-result", new RecordExamResult());
+        allRequests.put("add-student", new AddStudent());
+
+        return allRequests;
+    }
+
+    public void runTests() {
         // Create 3 students
         ArrayList<Student> testStudents = loadTestStudents();
 
@@ -36,7 +51,21 @@ public class ExamManagement {
         }
     }
 
-    public UserInteractor createUserInteractor() {
-        return new UserInteractor();
+    public void completeInteractionCycle() {
+        String nextInteractionReference = currentInteraction.transmitAndReceive(this);
+        currentInteraction = allInteractions.get(nextInteractionReference);
+        isFinished = (currentInteraction == null);
+    }
+
+    public boolean userIsFinished() {
+        return isFinished;
+    }
+
+    public void addExam(Scorable exam) {
+        allExams.add(exam);
+    }
+
+    public void addStudent(Student student) {
+        allStudents.add(student);
     }
 }

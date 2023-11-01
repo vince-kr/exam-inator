@@ -1,5 +1,4 @@
 import examinator.manager.ExamManagement;
-import examinator.manager.interact.UserInteractor;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,16 +9,15 @@ public class Main {
                 """;
         System.out.println(banner);
 
-        System.out.println("Running tests...");
-        // Creating an ExamManagement instance exercises the system
-        ExamManagement examManager = new ExamManagement();
-        System.out.println("Done!");
-        System.out.println();
+        // Create an ExamManagement instance
+        ExamManagement exMan = new ExamManagement();
 
-        // Create a UserInteractor to manage user interaction
-        UserInteractor ui = examManager.createUserInteractor();
-        while (!ui.userIsFinished()) {
-            ui.completeInteractionCycle();
+        // Test functionality by creating various objects
+        exMan.runTests();
+
+        // Start the main menu
+        while(!exMan.userIsFinished()) {
+            exMan.completeInteractionCycle();
         }
     }
 }

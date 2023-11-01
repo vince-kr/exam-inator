@@ -1,41 +1,41 @@
 package examinator.manager.interact.reqresdef;
 
+import examinator.manager.ExamManagement;
 import examinator.manager.interact.Interaction;
 import examinator.student.Student;
 import examinator.student.StudentException;
+import util.io.UserInput;
 
-import static examinator.manager.interact.reqresdef.Validator.getValidInput;
+import static util.io.UserInput.getValidUserInput;
 
 public class AddStudent implements Interaction {
 
     @Override
-    public String transmitAndReceive() {
-        String studentID = getStudentID();
-        String studentName = getStudentName();
-
-        Student newStudent;
+    public String transmitAndReceive(ExamManagement exMan) {
+        String studentID = askStudentID();
+        String studentName = askStudentName();
 
         try {
-            newStudent = new Student(Integer.parseInt(studentID), studentName);
+            exMan.addStudent(new Student(Integer.parseInt(studentID), studentName));
         } catch (StudentException se) {
             se.getMessage();
         }
 
-        return "add-student-2";
+        return "main";
     }
 
-    private String getStudentID() {
+    private String askStudentID() {
         String prompt = "Please enter the student's ID; this should consist of only numbers: ";
         String responsePattern = "^[0-9]+$";
 
-        return getValidInput(prompt, responsePattern);
+        return UserInput.getValidUserInput(prompt, responsePattern);
     }
 
-    private String getStudentName() {
+    private String askStudentName() {
         String prompt = "Please enter the student's name\n" +
                 "The name should be between 2 and 30 characters and may contain upper- and lowercase letters, spaces, and hyphens: ";
         String responsePattern = "^[a-zA-Z -]+$";
 
-        return getValidInput(prompt, responsePattern, 2, 30);
+        return getValidUserInput(prompt, responsePattern, 2, 30);
     }
 }
