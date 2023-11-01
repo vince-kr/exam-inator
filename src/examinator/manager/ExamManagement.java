@@ -13,6 +13,8 @@ import util.io.Files;
 import java.util.ArrayList;
 
 public class ExamManagement {
+    ArrayList<Scorable> allExams = new ArrayList<>();
+    ArrayList<Student> allStudents = new ArrayList<>();
 
     public ExamManagement() {
         // Create ArrayLists of students, exams, and exam results
