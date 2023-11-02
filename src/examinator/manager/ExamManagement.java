@@ -3,10 +3,7 @@ package examinator.manager;
 import examinator.ExamResult;
 import examinator.exam.Scorable;
 import examinator.manager.interact.Interaction;
-import examinator.manager.interact.reqresdef.AddStudent;
-import examinator.manager.interact.reqresdef.ListStudents;
-import examinator.manager.interact.reqresdef.MainMenu;
-import examinator.manager.interact.reqresdef.RecordExamResult;
+import examinator.manager.interact.reqresdef.*;
 import examinator.student.Student;
 
 import java.util.ArrayList;
@@ -33,24 +30,9 @@ public class ExamManagement {
         allRequests.put("record-exam-result", new RecordExamResult());
         allRequests.put("add-student", new AddStudent());
         allRequests.put("list-students", new ListStudents());
+        allRequests.put("load-sample-data", new LoadSamples());
 
         return allRequests;
-    }
-
-    public void runTests() {
-        // Create 3 students
-        ArrayList<Student> testStudents = loadTestStudents();
-
-        // Create 5 exams
-        ArrayList<Scorable> testExams = loadTestExams();
-
-        // Create 5 exam results by combining the lists of students and exams
-        ArrayList<ExamResult> testResults = createExamResults(testStudents, testExams);
-
-        // Print the exam results
-        for (ExamResult result : testResults) {
-            System.out.println(result);
-        }
     }
 
     public void completeInteractionCycle() {

@@ -1,6 +1,5 @@
 package examinator.manager;
 
-import examinator.ExamResult;
 import examinator.exam.Essay;
 import examinator.exam.ExamException;
 import examinator.exam.MultipleChoice;
@@ -10,17 +9,41 @@ import examinator.student.StudentException;
 import util.io.Files;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class TestObjectGenerator {
 
-    public static ArrayList<Student> loadTestStudents() {
-        // Helper method to create three Student objects
+    public static void loadSampleData(ExamManagement exMan) {
+        // Create and add six students
+        ArrayList<Student> testStudents = loadTestStudents();
+        for (Student student : testStudents) {
+            exMan.addStudent(student);
+        }
+
+        // Create and add fifteen exams
+        ArrayList<Scorable> testExams = loadTestExams();
+        for (Scorable exam : testExams) {
+            exMan.addExam(exam);
+        }
+
+        // Assign exams to students
+        for (Scorable exam : testExams) {
+            int randomIndex = ThreadLocalRandom.current().nextInt(0, 6);
+            Student assignee = testStudents.get(randomIndex);
+            assignee.addExam(exam);
+        }
+    }
+
+    private static ArrayList<Student> loadTestStudents() {
         ArrayList<Student> testStudents = new ArrayList<>();
 
         try {
-            testStudents.add(new Student(69, "Vince"));
-            testStudents.add(new Student(70, "Cindy"));
-            testStudents.add(new Student(71, "Patrick"));
+            testStudents.add(new Student(101, "Lê Quang Liêm"));
+            testStudents.add(new Student(102, "Hikaru Nakamura"));
+            testStudents.add(new Student(103, "Judit Polgár"));
+            testStudents.add(new Student(104, "Shakhriyar Mamedyarov"));
+            testStudents.add(new Student(105, "Василь Михайлович Іванчук"));
+            testStudents.add(new Student(106, "Alexandra Kosteniuk"));
         } catch (
                 StudentException se) {
             System.out.println("ERROR - " + se.getMessage());
@@ -29,25 +52,54 @@ public abstract class TestObjectGenerator {
         return testStudents;
     }
 
-    public static ArrayList<Scorable> loadTestExams() {
-        // Helper method to create five Exam objects
+    private static ArrayList<Scorable> loadTestExams() {
         ArrayList<Scorable> testExams = new ArrayList<>();
 
         try {
             testExams.add(new Essay(
-                    4, "Software dev", 90, loadEssayAnswer("short"), 96, 94, 500
+                    201, "History of chess", 180, loadEssayAnswer("short"), 82, 68, 600
             ));
             testExams.add(new Essay(
-                    14, "Structural modelling", 60, loadEssayAnswer("long"), 72, 89, 1000
+                    202, "Knowing Kasparov", 90, loadEssayAnswer("long"), 90, 88, 1000
+            ));
+            testExams.add(new Essay(
+                    203, "Carlsen's career", 90, loadEssayAnswer("short"), 80, 55, 1200
+            ));
+            testExams.add(new Essay(
+                    204, "Today's rising stars", 60, loadEssayAnswer("short"), 90, 92, 250
+            ));
+            testExams.add(new Essay(
+                    205, "Women in chess", 120, loadEssayAnswer("long"), 78, 84, 1200
             ));
             testExams.add(new MultipleChoice(
-                    5, "Bird quiz", 60, 12, 15
+                    301, "Sicilian opening: beginner", 60, 29, 40
             ));
             testExams.add(new MultipleChoice(
-                    12, "Software processes", 60, 28, 30
+                    302, "Sicilian opening: advanced", 60, 27, 40
             ));
             testExams.add(new MultipleChoice(
-                    13, "Algorithms", 120, 9, 50
+                    303, "The London system", 90, 48, 50
+            ));
+            testExams.add(new MultipleChoice(
+                    304, "The French defence", 90, 32, 50
+            ));
+            testExams.add(new MultipleChoice(
+                    305, "The Dutch defence", 90, 49, 50
+            ));
+            testExams.add(new MultipleChoice(
+                    306, "The Caro-Kann: beginner", 60, 21, 40
+            ));
+            testExams.add(new MultipleChoice(
+                    307, "The Caro-Kann: advanced", 60, 39, 50
+            ));
+            testExams.add(new MultipleChoice(
+                    308, "Grünfeld Defence: beginner", 60, 12, 40
+            ));
+            testExams.add(new MultipleChoice(
+                    309, "Endgame: bishop and knight", 120, 44, 50
+            ));
+            testExams.add(new MultipleChoice(
+                    310, "Endgame: QR vs Q", 120, 6, 50
             ));
         } catch (
                 ExamException ee) {
@@ -62,7 +114,8 @@ public abstract class TestObjectGenerator {
         return Files.readAsset(type + "_essay.txt");
     }
 
-    public static ArrayList<ExamResult> createExamResults(ArrayList<Student> students, ArrayList<Scorable> exams) {
+    /*
+    private static ArrayList<ExamResult> createExamResults(ArrayList<Student> students, ArrayList<Scorable> exams) {
         ArrayList<ExamResult> examResults = new ArrayList<>();
 
         for (int i = 0; i < exams.size(); i++) {
@@ -73,4 +126,5 @@ public abstract class TestObjectGenerator {
 
         return examResults;
     }
+     */
 }

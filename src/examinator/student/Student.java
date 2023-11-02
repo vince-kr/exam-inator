@@ -18,12 +18,12 @@ public class Student implements Printable {
         this.studentName = studentName;
     }
 
-    public int getStudentId() {
-        return studentId;
-    }
-
     public String getStudentName() {
         return studentName;
+    }
+
+    public void addExam(Scorable exam) {
+        examsTaken.add(exam);
     }
 
     @Override

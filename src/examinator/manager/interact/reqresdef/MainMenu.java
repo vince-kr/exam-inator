@@ -8,21 +8,22 @@ import static util.io.UserInput.getValidUserInput;
 
 public class MainMenu implements Interaction {
     String header = "MAIN MENU\n";
-    Menu menuOptions = new Menu();
+    Menu menu = new Menu();
     String prompt = "Please enter the letter or number of your choice: ";
-    String responsePattern = "^[aelx1-4]$";
+    String responsePattern = "^[aelsx1-5]$";
 
     public MainMenu() {
-        menuOptions.add(new MenuItem("Add a student", "a"));
-        menuOptions.add(new MenuItem("Store an exam result", "e"));
-        menuOptions.add(new MenuItem("List all students", "l"));
-        menuOptions.add(new MenuItem("Exit", "x"));
+        menu.add(new MenuItem("Add a student", "a"));
+        menu.add(new MenuItem("Store an exam result", "e"));
+        menu.add(new MenuItem("List all students", "l"));
+        menu.add(new MenuItem("Load sample data", "s"));
+        menu.add(new MenuItem("Exit", "x"));
     }
 
     @Override
     public String transmitAndReceive(ExamManagement exMan) {
         System.out.println(header);
-        System.out.println(menuOptions);
+        System.out.println(menu);
 
         String userInput = UserInput.getValidUserInput(prompt, responsePattern);
 
@@ -33,6 +34,8 @@ public class MainMenu implements Interaction {
                     "record-exam-result";
             case "l", "3" ->
                     "list-students";
+            case "s", "4" ->
+                    "load-sample-data";
             default ->
                     null;
         };
