@@ -63,13 +63,13 @@ public abstract class TestObjectGenerator {
                     202, "Knowing Kasparov", 90, loadEssayAnswer("long"), 90, 88, 1000
             ));
             testExams.add(new Essay(
-                    203, "Carlsen's career", 90, loadEssayAnswer("short"), 80, 55, 1200
+                    203, "Carlsen's career", 90, loadEssayAnswer("short"), 80, 55, 5200
             ));
             testExams.add(new Essay(
-                    204, "Today's rising stars", 60, loadEssayAnswer("short"), 90, 92, 250
+                    204, "Today's rising stars", 60, loadEssayAnswer("short"), 90, 92, 1250
             ));
             testExams.add(new Essay(
-                    205, "Women in chess", 120, loadEssayAnswer("long"), 78, 84, 1200
+                    205, "Women in chess", 120, loadEssayAnswer("long"), 78, 84, 8800
             ));
             testExams.add(new MultipleChoice(
                     301, "Sicilian opening: beginner", 60, 29, 40

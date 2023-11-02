@@ -46,12 +46,8 @@ public class ExamManagement {
         return isFinished;
     }
 
-    public String getAllStudents() {
-        StringBuilder allStudentsFmt = new StringBuilder();
-        for (Student student : allStudents) {
-            allStudentsFmt.append(student).append("\n");
-        }
-        return allStudentsFmt.toString();
+    public ArrayList<Student> getAllStudents() {
+        return allStudents;
     }
 
     public void addStudent(Student student) {

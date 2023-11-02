@@ -6,7 +6,7 @@ import examinator.student.Student;
 import examinator.student.StudentException;
 import util.io.UserInput;
 
-import static util.io.UserInput.getValidUserInput;
+import static util.io.UserInput.getValidStringInput;
 
 public class AddStudent implements Interaction {
 
@@ -30,7 +30,7 @@ public class AddStudent implements Interaction {
         String prompt = "Please enter the student's ID; this should consist of only numbers: ";
         String responsePattern = "^[0-9]+$";
 
-        return UserInput.getValidUserInput(prompt, responsePattern);
+        return UserInput.getValidStringInput(prompt, responsePattern);
     }
 
     private String askStudentName() {
@@ -38,6 +38,6 @@ public class AddStudent implements Interaction {
                 "The name should be between 2 and 30 characters and may contain upper- and lowercase letters, spaces, and hyphens: ";
         String responsePattern = "^[a-zA-Z -]+$";
 
-        return getValidUserInput(prompt, responsePattern, 2, 30);
+        return UserInput.getValidStringInput(prompt, responsePattern, 2, 30);
     }
 }

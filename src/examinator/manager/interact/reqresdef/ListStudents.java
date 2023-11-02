@@ -2,6 +2,9 @@ package examinator.manager.interact.reqresdef;
 
 import examinator.manager.ExamManagement;
 import examinator.manager.interact.Interaction;
+import examinator.student.Student;
+
+import java.util.ArrayList;
 
 public class ListStudents implements Interaction {
     String header = "LIST OF ALL STUDENTS";
@@ -9,7 +12,12 @@ public class ListStudents implements Interaction {
     @Override
     public String transmitAndReceive(ExamManagement exMan) {
         System.out.println(header);
-        System.out.println(exMan.getAllStudents());
+
+        ArrayList<Student> allStudents = exMan.getAllStudents();
+
+        for (Student student : allStudents) {
+            System.out.println(student);
+        }
 
         return "main";
     }

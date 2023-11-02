@@ -14,7 +14,7 @@ public class LoadSamples implements Interaction {
     public String transmitAndReceive(ExamManagement exMan) {
         System.out.println(header);
 
-        String userInput = UserInput.getValidUserInput(prompt, responsePattern);
+        String userInput = UserInput.getValidStringInput(prompt, responsePattern);
 
         if (userInput.equals("y") || userInput.equals("Y")) {
             TestObjectGenerator.loadSampleData(exMan);

@@ -4,7 +4,7 @@ import examinator.manager.ExamManagement;
 import examinator.manager.interact.Interaction;
 import util.io.UserInput;
 
-import static util.io.UserInput.getValidUserInput;
+import static util.io.UserInput.getValidStringInput;
 
 public class MainMenu implements Interaction {
     String header = "MAIN MENU\n";
@@ -25,7 +25,7 @@ public class MainMenu implements Interaction {
         System.out.println(header);
         System.out.println(menu);
 
-        String userInput = UserInput.getValidUserInput(prompt, responsePattern);
+        String userInput = UserInput.getValidStringInput(prompt, responsePattern);
 
         return switch (userInput) {
             case "a", "1" ->
