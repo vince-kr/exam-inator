@@ -16,7 +16,9 @@ public class AddStudent implements Interaction {
         String studentName = askStudentName();
 
         try {
-            exMan.addStudent(new Student(Integer.parseInt(studentID), studentName));
+            Student newStudent = new Student(Integer.parseInt(studentID), studentName);
+            exMan.addStudent(newStudent);
+            System.out.println("Student " + newStudent.getStudentName() + " added successfully!");
         } catch (StudentException se) {
             se.getMessage();
         }

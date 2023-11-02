@@ -10,11 +10,12 @@ public class MainMenu implements Interaction {
     String header = "MAIN MENU\n";
     Menu menuOptions = new Menu();
     String prompt = "Please enter the letter or number of your choice: ";
-    String responsePattern = "^[aex1-3]$";
+    String responsePattern = "^[aelx1-4]$";
 
     public MainMenu() {
         menuOptions.add(new MenuItem("Add a student", "a"));
         menuOptions.add(new MenuItem("Store an exam result", "e"));
+        menuOptions.add(new MenuItem("List all students", "l"));
         menuOptions.add(new MenuItem("Exit", "x"));
     }
 
@@ -30,6 +31,8 @@ public class MainMenu implements Interaction {
                     "add-student";
             case "e", "2" ->
                     "record-exam-result";
+            case "l", "3" ->
+                    "list-students";
             default ->
                     null;
         };

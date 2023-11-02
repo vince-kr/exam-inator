@@ -55,6 +55,6 @@ public class Student implements Printable {
     }
 
     public String toString() {
-        return this.printSummaryResult();
+        return studentSummary();
     }
 }

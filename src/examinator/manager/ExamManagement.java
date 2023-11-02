@@ -4,6 +4,7 @@ import examinator.ExamResult;
 import examinator.exam.Scorable;
 import examinator.manager.interact.Interaction;
 import examinator.manager.interact.reqresdef.AddStudent;
+import examinator.manager.interact.reqresdef.ListStudents;
 import examinator.manager.interact.reqresdef.MainMenu;
 import examinator.manager.interact.reqresdef.RecordExamResult;
 import examinator.student.Student;
@@ -31,6 +32,7 @@ public class ExamManagement {
         allRequests.put("main", new MainMenu());
         allRequests.put("record-exam-result", new RecordExamResult());
         allRequests.put("add-student", new AddStudent());
+        allRequests.put("list-students", new ListStudents());
 
         return allRequests;
     }
@@ -52,6 +54,7 @@ public class ExamManagement {
     }
 
     public void completeInteractionCycle() {
+        System.out.println();
         String nextInteractionReference = currentInteraction.transmitAndReceive(this);
         currentInteraction = allInteractions.get(nextInteractionReference);
         isFinished = (currentInteraction == null);
@@ -61,11 +64,19 @@ public class ExamManagement {
         return isFinished;
     }
 
-    public void addExam(Scorable exam) {
-        allExams.add(exam);
+    public String getAllStudents() {
+        StringBuilder allStudentsFmt = new StringBuilder();
+        for (Student student : allStudents) {
+            allStudentsFmt.append(student).append("\n");
+        }
+        return allStudentsFmt.toString();
     }
 
     public void addStudent(Student student) {
         allStudents.add(student);
     }
+    public void addExam(Scorable exam) {
+        allExams.add(exam);
+    }
+
 }
