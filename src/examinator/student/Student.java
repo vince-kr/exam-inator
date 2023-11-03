@@ -31,10 +31,11 @@ public class Student implements Printable {
         // Introduce the student, then:
         // say number of exams taken (length of Exams field); then subject, score all on 1 line
         StringBuilder summaryResult = new StringBuilder();
-        summaryResult.append(studentSummary());
-        summaryResult.append(examsTaken.size() + "\n");
+        summaryResult.append(studentNameID());
+        summaryResult.append("Exams taken: " + examsTaken.size() + "\n");
+        summaryResult.append(String.format("%1$-" + 36 + "s", "SUBJECT") + "SCORE\n");
         for (Scorable exam : examsTaken) {
-            summaryResult.append(exam + "\t" + exam.calculateScore() + "\n");
+            summaryResult.append(exam + " " + exam.calculateScore() + "\n");
         }
         return summaryResult.toString();
     }
@@ -46,7 +47,7 @@ public class Student implements Printable {
         return null;
     }
 
-    private String studentSummary() {
+    private String studentNameID() {
         String delim = "----------------------------------------------------------------\n";
         return delim +
                 "\tName: " + String.format("%1$-" + 36 + "s", studentName) +
@@ -55,6 +56,6 @@ public class Student implements Printable {
     }
 
     public String toString() {
-        return studentSummary();
+        return printSummaryResult();
     }
 }

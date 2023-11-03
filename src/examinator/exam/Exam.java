@@ -19,6 +19,14 @@ abstract class Exam implements Scorable {
     }
 
     public String toString() {
-        return subject;
+        String fmtSubject;
+
+        if (subject.length() > 35) {
+            fmtSubject = subject.substring(0, 32) + "...";
+        } else {
+            fmtSubject = subject;
+        }
+
+        return String.format("%1$-" + 36 + "s", fmtSubject);
     }
 }
