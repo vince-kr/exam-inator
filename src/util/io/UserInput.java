@@ -35,7 +35,11 @@ public abstract class UserInput {
         int numberEntered;
 
         if (userInput.matches("^[0-9]+$")) {
-            numberEntered = Integer.parseInt(userInput);
+            try {
+                numberEntered = Integer.parseInt(userInput);
+            } catch (NumberFormatException nf) {
+                numberEntered = -1;
+            }
             if (min <= numberEntered && numberEntered <= max) {
                 return numberEntered;
             }
