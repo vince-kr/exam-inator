@@ -1,5 +1,6 @@
 package examinator.manager;
 
+import examinator.ExamResult;
 import examinator.exam.Scorable;
 import examinator.manager.interact.*;
 import examinator.student.Student;
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ExamManagement {
-    ArrayList<Scorable> allExams = new ArrayList<>();
     ArrayList<Student> allStudents = new ArrayList<>();
+    ArrayList<ExamResult> allResults = new ArrayList<>();
     private Interaction currentInteraction;
     private final HashMap<String, Interaction> allInteractions;
     boolean isFinished;
@@ -49,7 +50,8 @@ public class ExamManagement {
     public void addStudent(Student student) {
         allStudents.add(student);
     }
-    public void addExam(Scorable exam) {
-        allExams.add(exam);
+
+    public void addResult(Student student, Scorable exam) {
+        allResults.add(new ExamResult(student, exam));
     }
 }

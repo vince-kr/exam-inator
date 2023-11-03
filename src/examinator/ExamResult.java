@@ -8,10 +8,10 @@ public class ExamResult implements Comparable<ExamResult> {
     Scorable exam;
     int score;
 
-    public ExamResult(Student student, Scorable exam, int score) {
+    public ExamResult(Student student, Scorable exam) {
         this.student = student;
         this.exam = exam;
-        this.score = score;
+        this.score = exam.calculateScore();
     }
 
     @Override

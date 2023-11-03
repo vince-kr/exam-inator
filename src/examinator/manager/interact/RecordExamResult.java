@@ -6,7 +6,9 @@ import examinator.exam.MultipleChoice;
 import examinator.exam.Scorable;
 import examinator.manager.ExamManagement;
 import examinator.student.Student;
+
 import static util.io.UserInput.*;
+
 import java.util.ArrayList;
 
 public class RecordExamResult implements Interaction {
@@ -27,13 +29,18 @@ public class RecordExamResult implements Interaction {
 
         try {
             switch (askExamType()) {
-                case "e", "E" ->
-                        targetStudent.addExam(createNewEssay());
-                case "m", "M" ->
-                        targetStudent.addExam(createNewMultChoice());
+                case "e", "E":
+                    Scorable newEssay = createNewEssay();
+                    targetStudent.addExam(newEssay);
+                    exMan.addResult(targetStudent, newEssay);
+                case "m", "M":
+                    Scorable newMultChoice = createNewMultChoice();
+                    targetStudent.addExam(newMultChoice);
+                    exMan.addResult(targetStudent, newMultChoice);
             }
             System.out.println("Exam successfully recorded for student " + targetStudent.getStudentName() + "!");
-        } catch (ExamException ee) {
+        } catch (
+                ExamException ee) {
             System.out.println(ee.getMessage());
         }
 

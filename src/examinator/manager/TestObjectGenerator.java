@@ -20,17 +20,12 @@ public abstract class TestObjectGenerator {
             exMan.addStudent(student);
         }
 
-        // Create and add fifteen exams
-        ArrayList<Scorable> testExams = loadTestExams();
-        for (Scorable exam : testExams) {
-            exMan.addExam(exam);
-        }
-
-        // Assign exams to students
-        for (Scorable exam : testExams) {
+        // Assign 15 exams to random students
+        for (Scorable exam : loadTestExams()) {
             int randomIndex = ThreadLocalRandom.current().nextInt(0, 6);
             Student assignee = testStudents.get(randomIndex);
             assignee.addExam(exam);
+            exMan.addResult(assignee, exam);
         }
     }
 
