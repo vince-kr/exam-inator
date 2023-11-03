@@ -22,8 +22,9 @@ public class MultipleChoice extends Exam implements Scorable {
         this.noQuestions = noQuestions;
     }
 
-    public String displayExamDetails() {
-        return String.format("MULTIPLE CHOICE DETAILS\n\tSubject:\t %s \n\tDuration:\t %d", this.subject, this.duration);
+    @Override
+    public String getType() {
+        return "Multiple choice";
     }
 
     @Override

@@ -27,6 +27,7 @@ public class ExamManagement {
         allRequests.put("record-exam-result", new RecordExamResult());
         allRequests.put("add-student", new AddStudent());
         allRequests.put("list-students", new ListStudents());
+        allRequests.put("examine-student", new ExamineStudent());
         allRequests.put("load-sample-data", new LoadSamples());
 
         return allRequests;

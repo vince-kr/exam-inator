@@ -31,6 +31,11 @@ public class Essay extends Exam implements Scorable {
         }
     }
 
+    @Override
+    public String getType() {
+        return "Essay";
+    }
+
     private int gradeEssay() {
         // Grammar weight 30%, content weight 70%
         double essayScore = grammar * 0.3 + content * 0.7;

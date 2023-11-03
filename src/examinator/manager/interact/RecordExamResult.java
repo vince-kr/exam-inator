@@ -33,10 +33,12 @@ public class RecordExamResult implements Interaction {
                     Scorable newEssay = createNewEssay();
                     targetStudent.addExam(newEssay);
                     exMan.addResult(targetStudent, newEssay);
+                    break;
                 case "m", "M":
                     Scorable newMultChoice = createNewMultChoice();
                     targetStudent.addExam(newMultChoice);
                     exMan.addResult(targetStudent, newMultChoice);
+                    break;
             }
             System.out.println("Exam successfully recorded for student " + targetStudent.getStudentName() + "!");
         } catch (
@@ -50,7 +52,7 @@ public class RecordExamResult implements Interaction {
     private Student selectStudent(ArrayList<Student> allStudents) {
         String prompt = "Please enter the number corresponding to your student: ";
 
-        int choice = getValidInteger(prompt, 0, allStudents.size());
+        int choice = getValidInteger(prompt, 1, allStudents.size());
         return allStudents.get(choice - 1);
     }
 

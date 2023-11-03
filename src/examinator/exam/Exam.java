@@ -1,6 +1,8 @@
 package examinator.exam;
 
-abstract class Exam implements Scorable {
+import static util.format.StringFormat.standardise;
+
+public abstract class Exam implements Scorable {
     int examId;
     String subject;
     int duration;
@@ -14,19 +16,21 @@ abstract class Exam implements Scorable {
         this.duration = duration;
     }
 
+    public int getExamId() {
+        return examId;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
     public int getDuration() {
         return duration;
     }
 
+    public abstract String getType();
+
     public String toString() {
-        String fmtSubject;
-
-        if (subject.length() > 35) {
-            fmtSubject = subject.substring(0, 32) + "...";
-        } else {
-            fmtSubject = subject;
-        }
-
-        return String.format("%1$-" + 36 + "s", fmtSubject);
+        return standardise(subject, 36);
     }
 }
