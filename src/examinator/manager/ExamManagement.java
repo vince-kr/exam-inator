@@ -28,6 +28,7 @@ public class ExamManagement {
         allInteractions.put("add-student", new AddStudent());
         allInteractions.put("list-students", new ListStudents());
         allInteractions.put("examine-student", new ExamineStudent());
+        allInteractions.put("list-results", new ListResults());
         allInteractions.put("load-sample-data", new LoadSamples());
 
         return allInteractions;
@@ -54,5 +55,9 @@ public class ExamManagement {
 
     public void addResult(Student student, Scorable exam) {
         allResults.add(new ExamResult(student, exam));
+    }
+
+    public ArrayList<ExamResult> getExamResults() {
+        return allResults;
     }
 }

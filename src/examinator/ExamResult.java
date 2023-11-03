@@ -17,20 +17,28 @@ public class ExamResult implements Comparable<ExamResult> {
         this.score = exam.calculateScore();
     }
 
+    public int getScore() {
+        return score;
+    }
+
     @Override
     public int compareTo(ExamResult other) {
-        return this.score - other.score;
+        return other.getScore() - this.score;
+    }
+
+    @Override
+    public String toString() {
+        return standardise(student.getStudentName(), 36) +
+                standardise(exam.getSubject(), 36) +
+                score;
     }
 
     public String toString(int[] columnWidths) {
-        StringBuilder fieldValues = new StringBuilder();
 
-        fieldValues.append(standardise(String.valueOf(exam.getExamId()), columnWidths[0]));
-        fieldValues.append(standardise(exam.getSubject(), columnWidths[1]));
-        fieldValues.append(standardise(String.valueOf(exam.getDuration()), columnWidths[2]));
-        fieldValues.append(standardise(exam.getType(), columnWidths[3]));
-        fieldValues.append(standardise(String.valueOf(exam.calculateScore()), columnWidths[4]));
-
-        return fieldValues.toString();
+        return standardise(String.valueOf(exam.getExamId()), columnWidths[0]) +
+                standardise(exam.getSubject(), columnWidths[1]) +
+                standardise(String.valueOf(exam.getDuration()), columnWidths[2]) +
+                standardise(exam.getType(), columnWidths[3]) +
+                standardise(String.valueOf(exam.calculateScore()), columnWidths[4]);
     }
 }

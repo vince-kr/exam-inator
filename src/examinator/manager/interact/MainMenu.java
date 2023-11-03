@@ -9,13 +9,14 @@ public class MainMenu implements Interaction {
     String header = "MAIN MENU\n";
     Menu menu = new Menu();
     String prompt = "Please enter the letter or number of your choice: ";
-    String responsePattern = "^[aelosx1-6]$";
+    String responsePattern = "^[aelorsx1-7]$";
 
     public MainMenu() {
         menu.add(new MenuItem("Add a student", "a"));
         menu.add(new MenuItem("Store an exam result", "e"));
         menu.add(new MenuItem("List all students", "l"));
         menu.add(new MenuItem("Examine one student", "o"));
+        menu.add(new MenuItem("List all results", "r"));
         menu.add(new MenuItem("Load sample data", "s"));
         menu.add(new MenuItem("Exit", "x"));
     }
@@ -36,7 +37,9 @@ public class MainMenu implements Interaction {
                     "list-students";
             case "o", "4" ->
                     "examine-student";
-            case "s", "5" ->
+            case "r", "5" ->
+                "list-results";
+            case "s", "6" ->
                     "load-sample-data";
             default ->
                     null;
