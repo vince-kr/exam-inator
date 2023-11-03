@@ -1,4 +1,4 @@
-package examinator.manager.interact.reqresdef;
+package examinator.manager.interact;
 
 import examinator.exam.Essay;
 import examinator.exam.ExamException;

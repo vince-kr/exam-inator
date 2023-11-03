@@ -1,15 +1,11 @@
 package examinator.manager;
 
-import examinator.ExamResult;
 import examinator.exam.Scorable;
-import examinator.manager.interact.Interaction;
-import examinator.manager.interact.reqresdef.*;
+import examinator.manager.interact.*;
 import examinator.student.Student;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static examinator.manager.TestObjectGenerator.*;
 
 public class ExamManagement {
     ArrayList<Scorable> allExams = new ArrayList<>();

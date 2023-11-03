@@ -1,7 +1,6 @@
-package examinator.manager.interact.reqresdef;
+package examinator.manager.interact;
 
 import examinator.manager.ExamManagement;
-import examinator.manager.interact.Interaction;
 import util.io.UserInput;
 
 import static util.io.UserInput.getValidStringInput;
