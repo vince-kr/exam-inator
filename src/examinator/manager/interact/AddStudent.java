@@ -6,17 +6,18 @@ import examinator.student.Student;
 import examinator.student.StudentException;
 import util.io.UserInput;
 
+import static util.io.UserInput.getValidInteger;
 import static util.io.UserInput.getValidStringInput;
 
 public class AddStudent implements Interaction {
 
     @Override
     public String transmitAndReceive(ExamManagement exMan) {
-        String studentID = askStudentID();
+        int studentID = askStudentID();
         String studentName = askStudentName();
 
         try {
-            Student newStudent = new Student(Integer.parseInt(studentID), studentName);
+            Student newStudent = new Student(studentID, studentName);
             exMan.addStudent(newStudent);
             System.out.println("Student " + newStudent.getStudentName() + " added successfully!");
         } catch (StudentException se) {
@@ -26,11 +27,10 @@ public class AddStudent implements Interaction {
         return "main";
     }
 
-    private String askStudentID() {
+    private int askStudentID() {
         String prompt = "Please enter the student's ID; this should consist of only numbers: ";
-        String responsePattern = "^[0-9]+$";
 
-        return UserInput.getValidStringInput(prompt, responsePattern);
+        return getValidInteger(prompt);
     }
 
     private String askStudentName() {
@@ -38,6 +38,6 @@ public class AddStudent implements Interaction {
                 "The name should be between 2 and 30 characters and may contain upper- and lowercase letters, spaces, and hyphens: ";
         String responsePattern = "^[a-zA-Z -]+$";
 
-        return UserInput.getValidStringInput(prompt, responsePattern, 2, 30);
+        return getValidStringInput(prompt, responsePattern, 2, 30);
     }
 }

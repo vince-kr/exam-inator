@@ -52,5 +52,4 @@ public class ExamManagement {
     public void addExam(Scorable exam) {
         allExams.add(exam);
     }
-
 }

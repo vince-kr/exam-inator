@@ -5,11 +5,8 @@ import examinator.exam.ExamException;
 import examinator.exam.MultipleChoice;
 import examinator.exam.Scorable;
 import examinator.manager.ExamManagement;
-import examinator.manager.interact.Interaction;
 import examinator.student.Student;
-
 import static util.io.UserInput.*;
-
 import java.util.ArrayList;
 
 public class RecordExamResult implements Interaction {
@@ -45,9 +42,8 @@ public class RecordExamResult implements Interaction {
 
     private Student selectStudent(ArrayList<Student> allStudents) {
         String prompt = "Please enter the number corresponding to your student: ";
-        String responsePattern = String.format("^[1-%d]$", allStudents.size());
 
-        int choice = Integer.parseInt(getValidStringInput(prompt, responsePattern));
+        int choice = getValidInteger(prompt, 0, allStudents.size());
         return allStudents.get(choice - 1);
     }
 
