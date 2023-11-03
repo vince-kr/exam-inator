@@ -60,10 +60,6 @@ public class Essay extends Exam implements Scorable {
         return penalty;
     }
 
-    public String displayExamDetails() {
-        return String.format("ESSAY DETAILS\n\tSubject:\t %s\n\tDuration:\t %d\n\t", this.subject, this.duration);
-    }
-
     @Override
     public int calculateScore() {
         return gradeEssay();
