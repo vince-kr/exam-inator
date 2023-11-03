@@ -21,16 +21,16 @@ public class ExamManagement {
     }
 
     private HashMap<String, Interaction> loadInteractions() {
-        HashMap<String, Interaction> allRequests = new HashMap<>();
+        HashMap<String, Interaction> allInteractions = new HashMap<>();
 
-        allRequests.put("main", new MainMenu());
-        allRequests.put("record-exam-result", new RecordExamResult());
-        allRequests.put("add-student", new AddStudent());
-        allRequests.put("list-students", new ListStudents());
-        allRequests.put("examine-student", new ExamineStudent());
-        allRequests.put("load-sample-data", new LoadSamples());
+        allInteractions.put("main", new MainMenu());
+        allInteractions.put("record-exam-result", new RecordExamResult());
+        allInteractions.put("add-student", new AddStudent());
+        allInteractions.put("list-students", new ListStudents());
+        allInteractions.put("examine-student", new ExamineStudent());
+        allInteractions.put("load-sample-data", new LoadSamples());
 
-        return allRequests;
+        return allInteractions;
     }
 
     public void completeInteractionCycle() {

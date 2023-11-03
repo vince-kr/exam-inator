@@ -5,8 +5,7 @@ public class Main {
         String banner = """
                 ===================
                 !!  EXAM-INATOR  !!
-                ===================
-                """;
+                ===================""";
         System.out.println(banner);
 
         ExamManagement exMan = new ExamManagement();
