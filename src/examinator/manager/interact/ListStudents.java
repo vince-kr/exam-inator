@@ -19,6 +19,6 @@ public class ListStudents implements Interaction {
             System.out.println(student);
         }
 
-        return "main";
+        return "print-student-list";
     }
 }

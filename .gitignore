@@ -5,3 +5,4 @@ out/
 !**/src/test/**/out/
 
 old_structure
+*txt
