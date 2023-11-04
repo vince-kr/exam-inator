@@ -1,6 +1,6 @@
 package examinator.exam;
 
-import static util.format.StringFormat.standardise;
+import util.format.StringFormat;
 
 public abstract class Exam implements Scorable {
     int examId;
@@ -31,6 +31,6 @@ public abstract class Exam implements Scorable {
     public abstract String getType();
 
     public String toString() {
-        return standardise(subject, 36);
+        return StringFormat.standardise(subject, 36);
     }
 }

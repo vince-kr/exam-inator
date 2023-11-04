@@ -1,10 +1,9 @@
 package examinator.manager.interact;
 
 import examinator.manager.ExamManagement;
+import util.io.UserInput;
 
 import java.util.Collections;
-
-import static util.io.UserInput.getValidStringInput;
 
 public class SortResultsMenu implements Interaction {
     String header = "SORT RESULTS\n";
@@ -26,7 +25,7 @@ public class SortResultsMenu implements Interaction {
         System.out.println(header);
         System.out.println(menu);
 
-        String userInput = getValidStringInput(prompt, responsePattern);
+        String userInput = UserInput.getValidString(prompt, responsePattern);
 
         return switch (userInput) {
             case "h", "H", "1" -> {

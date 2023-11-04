@@ -1,8 +1,7 @@
 package examinator.manager.interact;
 
 import examinator.manager.ExamManagement;
-
-import static util.io.UserInput.getValidStringInput;
+import util.io.UserInput;
 
 public class MainMenu implements Interaction {
     // The main menu at the root of user interaction
@@ -28,7 +27,7 @@ public class MainMenu implements Interaction {
         System.out.println(header);
         System.out.println(menu);
 
-        String userInput = getValidStringInput(prompt, responsePattern);
+        String userInput = UserInput.getValidString(prompt, responsePattern);
 
         return switch (userInput) {
             // Return a reference to an Interaction loaded in ExamManagement

@@ -1,55 +1,42 @@
 package examinator.manager.interact;
 
 import examinator.manager.ExamManagement;
-import examinator.manager.interact.Interaction;
 import examinator.student.Student;
+import util.io.Files;
+import util.io.UserInput;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import static util.io.UserInput.getValidStringInput;
-
 public class ListStudents implements Interaction {
-    String header = "LIST OF ALL STUDENTS";
+
+    String header = "LIST OF ALL STUDENTS\n";
 
     @Override
     public String transmitAndReceive(ExamManagement exMan) {
-        System.out.println(header);
-
         ArrayList<Student> allStudents = exMan.getAllStudents();
 
-        for (Student student : allStudents) {
-            System.out.println(student);
+        if (allStudents.isEmpty()) {
+            System.out.println("No students are registered yet. There's nothing to list.");
+            return "main";
         }
+
+        System.out.println(header);
+
+        StringBuilder summaryString = new StringBuilder();
+        for (Student student : allStudents) {
+            summaryString.append(student);
+        }
+
+        System.out.println(summaryString);
 
         String prompt = "Would you like to save the students list to file? [y/n] ";
         String responsePattern = "^[YyNn]$";
-        String wantsToPrint = getValidStringInput(prompt, responsePattern);
+        String wantsToPrint = UserInput.getValidString(prompt, responsePattern);
 
-        if (wantsToPrint.equals("y") || wantsToPrint.equals("Y"))
-            createAndWriteSummary(exMan);
+        if (wantsToPrint.equals("y") || wantsToPrint.equals("Y")) {
+            Files.writeStudentList(summaryString.toString());
+        }
 
         return "main";
-    }
-
-    private void createAndWriteSummary(ExamManagement exMan) {
-        StringBuilder summaryString = new StringBuilder();
-        for (Student student : exMan.getAllStudents()) {
-            summaryString.append(student);
-            summaryString.append("\n");
-        }
-
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("students_list.txt"));
-            writer.write(summaryString.toString());
-            writer.close();
-            System.out.println("SUCCESS - students saved in 'students_list.txt'");
-        } catch (
-                IOException ie) {
-            System.out.println("ERROR - not able to write the students file.");
-            System.out.println(ie.getMessage());
-        }
     }
 }

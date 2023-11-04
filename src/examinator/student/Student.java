@@ -2,10 +2,9 @@ package examinator.student;
 
 import examinator.ExamResult;
 import examinator.exam.Scorable;
+import util.format.StringFormat;
 
 import java.util.ArrayList;
-
-import static util.format.StringFormat.standardise;
 
 public class Student implements Printable {
     int studentId;
@@ -36,7 +35,7 @@ public class Student implements Printable {
         StringBuilder summaryResult = new StringBuilder();
         summaryResult.append(studentNameID());
         summaryResult.append("Exams taken: " + examsTaken.size() + "\n");
-        summaryResult.append(standardise("SUBJECT", 36));
+        summaryResult.append(StringFormat.standardise("SUBJECT", 36));
         summaryResult.append("SCORE\n");
 
         for (Scorable exam : examsTaken) {
@@ -76,7 +75,7 @@ public class Student implements Printable {
         String[] headers = {"Exam ID", "Subject", "Duration", "Type", "Score"};
 
         for (int i = 0; i<columnWidths.length; i++) {
-            headerLine.append(standardise(headers[i], columnWidths[i]));
+            headerLine.append(StringFormat.standardise(headers[i], columnWidths[i]));
         }
         headerLine.append("\n");
 

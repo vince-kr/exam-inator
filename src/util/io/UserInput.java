@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public abstract class UserInput {
 
-    public static String getValidStringInput(
+    public static String getValidString(
             String prompt, String responsePattern, int min, int max) {
         // Prompt user for input until their input matches the response pattern and length
         Scanner userIn = new Scanner(System.in);
@@ -19,30 +19,33 @@ public abstract class UserInput {
 
         // Input does not match: warn the user, then recursively call the method
         System.out.println("WARNING - your input '" + userInput + "' is not valid!");
-        return getValidStringInput(prompt, responsePattern, min, max);
+        return getValidString(prompt, responsePattern, min, max);
     }
 
-    public static String getValidStringInput(String prompt, String responsePattern) {
+    public static String getValidString(String prompt, String responsePattern) {
         // Like above, but we don't care about the length of the input
-        return getValidStringInput(prompt, responsePattern, 0, Integer.MAX_VALUE);
+        return getValidString(prompt, responsePattern, 0, Integer.MAX_VALUE);
     }
 
-    public static int getValidPositiveInteger(String prompt, int max) {
-        // Prompt user for a positive number from zero to max inclusive
+    public static int getValidPositiveInteger(String prompt, int min, int max) {
+        // Prompt user for a positive number from min to max inclusive
         Scanner userIn = new Scanner(System.in);
 
         System.out.print(prompt);
         String userInput = userIn.nextLine();
 
         int numberEntered;
+        boolean numberCanBeFormatted;
 
         if (userInput.matches("^[0-9]+$")) {  // regex match: at least one number
             try {
                 numberEntered = Integer.parseInt(userInput);
+                numberCanBeFormatted = true;
             } catch (NumberFormatException nf) {
                 numberEntered = 0;
+                numberCanBeFormatted = false;
             }
-            if (1 <= numberEntered && numberEntered <= max) {
+            if (numberCanBeFormatted && min <= numberEntered && numberEntered <= max) {
                 return numberEntered;
             }
         }
@@ -51,8 +54,13 @@ public abstract class UserInput {
         return getValidPositiveInteger(prompt, max);
     }
 
+    public static int getValidPositiveInteger(String prompt, int max) {
+        // Like above, but lower bound is 1
+        return getValidPositiveInteger(prompt, 1, max);
+    }
+
     public static int getValidPositiveInteger(String prompt) {
-        // Like above, but no upper bound as long as it fits in memory
-        return getValidPositiveInteger(prompt, Integer.MAX_VALUE);
+        // Like above, but no limits as long as it fits in memory
+        return getValidPositiveInteger(prompt, 0, Integer.MAX_VALUE);
     }
 }

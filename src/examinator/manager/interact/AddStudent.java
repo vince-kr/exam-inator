@@ -3,9 +3,7 @@ package examinator.manager.interact;
 import examinator.manager.ExamManagement;
 import examinator.student.Student;
 import examinator.student.StudentException;
-
-import static util.io.UserInput.getValidPositiveInteger;
-import static util.io.UserInput.getValidStringInput;
+import util.io.UserInput;
 
 public class AddStudent implements Interaction {
 
@@ -28,7 +26,7 @@ public class AddStudent implements Interaction {
     private int askStudentID() {
         String prompt = "Please enter the student's ID; this should consist of only numbers: ";
 
-        return getValidPositiveInteger(prompt);
+        return UserInput.getValidPositiveInteger(prompt);
     }
 
     private String askStudentName() {
@@ -36,6 +34,6 @@ public class AddStudent implements Interaction {
                 "The name should be between 2 and 30 characters and may contain upper- and lowercase ASCII letters, spaces, and hyphens: ";
         String responsePattern = "^[a-zA-Z -]+$";
 
-        return getValidStringInput(prompt, responsePattern, 2, 30);
+        return UserInput.getValidString(prompt, responsePattern, 2, 30);
     }
 }

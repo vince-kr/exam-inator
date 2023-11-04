@@ -4,7 +4,7 @@ import examinator.ExamResult;
 import examinator.manager.ExamManagement;
 
 public class ListResults implements Interaction {
-    String header = "LIST ALL RESULTS";
+    String header = "LIST ALL RESULTS\n";
 
     @Override
     public String transmitAndReceive(ExamManagement exMan) {
