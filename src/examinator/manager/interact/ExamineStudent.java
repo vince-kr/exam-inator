@@ -13,7 +13,7 @@ public class ExamineStudent implements Interaction {
     public String transmitAndReceive(ExamManagement exMan) {
         ArrayList<Student> allStudents = exMan.getAllStudents();
 
-        if (allStudents.size() < 1) {
+        if (allStudents.isEmpty()) {
             System.out.println("No students are registered yet!\n" +
                     "Please use the appropriate options to add a new student or record an exam result.");
             return "main";

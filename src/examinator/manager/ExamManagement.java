@@ -33,7 +33,6 @@ public class ExamManagement {
         allInteractions.put("list-results", new ListResults());
         allInteractions.put("load-sample-data", new LoadSamples());
         allInteractions.put("sort-options", new SortResultsMenu());
-        allInteractions.put("print-student-list", new PrintStudentList());
 
         return allInteractions;
     }

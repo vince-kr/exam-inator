@@ -4,7 +4,12 @@ import examinator.manager.ExamManagement;
 import examinator.manager.interact.Interaction;
 import examinator.student.Student;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import static util.io.UserInput.getValidStringInput;
 
 public class ListStudents implements Interaction {
     String header = "LIST OF ALL STUDENTS";
@@ -19,6 +24,31 @@ public class ListStudents implements Interaction {
             System.out.println(student);
         }
 
-        return "print-student-list";
+        String prompt = "Would you like to print the students list? [y/n] ";
+        String responsePattern = "^[YyNn]$";
+
+        String userInput = getValidStringInput(prompt, responsePattern);
+
+        if (userInput.equals("y") || userInput.equals("Y")) {
+            StringBuilder summaryString = new StringBuilder();
+            for (Student student : exMan.getAllStudents()) {
+                summaryString.append(student);
+                summaryString.append("\n");
+            }
+
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("students_list.txt"));
+                writer.write(summaryString.toString());
+                writer.close();
+                System.out.println("SUCCESS - students saved in 'students_list.txt'");
+            } catch (
+                    IOException ie) {
+                System.out.println("ERROR - not able to write the students file.");
+                System.out.println(ie.getMessage());
+            }
+
+        }
+
+        return "main";
     }
 }
