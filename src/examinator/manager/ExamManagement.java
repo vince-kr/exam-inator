@@ -7,10 +7,12 @@ import examinator.student.Student;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class ExamManagement {
     ArrayList<Student> allStudents = new ArrayList<>();
-    ArrayList<ExamResult> allResults = new ArrayList<>();
+    ArrayList<ExamResult> allResultsInput = new ArrayList<>();
+    ArrayList<ExamResult> allResultsOutput = new ArrayList<>();
     private Interaction currentInteraction;
     private final HashMap<String, Interaction> allInteractions;
     boolean isFinished;
@@ -55,10 +57,21 @@ public class ExamManagement {
     }
 
     public void addResult(Student student, Scorable exam) {
-        allResults.add(new ExamResult(student, exam));
+        allResultsInput.add(new ExamResult(student, exam));
+        syncResultLists();
     }
 
     public ArrayList<ExamResult> getExamResults() {
-        return allResults;
+        return allResultsOutput;
+    }
+
+    public void getExamResults(String typeFilter) {
+        allResultsOutput = allResultsInput.stream()
+                .filter(er -> er.getExam().getType().equals(typeFilter))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public void syncResultLists() {
+        allResultsOutput = allResultsInput;
     }
 }

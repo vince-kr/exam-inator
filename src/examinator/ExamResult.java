@@ -17,6 +17,10 @@ public class ExamResult implements Comparable<ExamResult> {
         this.score = exam.calculateScore();
     }
 
+    public Exam getExam() {
+        return exam;
+    }
+
     public int getScore() {
         return score;
     }
