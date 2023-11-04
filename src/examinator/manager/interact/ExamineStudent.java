@@ -4,6 +4,9 @@ import examinator.manager.ExamManagement;
 import examinator.student.Student;
 import static util.io.UserInput.*;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ExamineStudent implements Interaction {
@@ -27,8 +30,16 @@ public class ExamineStudent implements Interaction {
         }
         System.out.println();
 
-        String detailedResults = selectStudent(allStudents).printDetailedResults();
+        Student student = selectStudent(allStudents);
+        String detailedResults = student.printDetailedResults();
         System.out.println(detailedResults);
+
+        String prompt = "Would you like to print the student's details? [y/n] ";
+        String responsePattern = "^[YyNn]$";
+        String wantsToPrint = getValidStringInput(prompt, responsePattern);
+
+        if (wantsToPrint.equals("y") || wantsToPrint.equals("Y"))
+            writeDetails(student.getStudentName(), detailedResults);
 
         return "main";
     }
@@ -38,5 +49,18 @@ public class ExamineStudent implements Interaction {
 
         int choice = getValidInteger(prompt, 1, allStudents.size());
         return allStudents.get(choice - 1);
+    }
+
+    private void writeDetails(String name, String details) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(name + ".txt"));
+            writer.write(details);
+            writer.close();
+            System.out.println("SUCCESS - students saved in 'students_list.txt'");
+        } catch (
+                IOException ie) {
+            System.out.println("ERROR - not able to write the students file.");
+            System.out.println(ie.getMessage());
+        }
     }
 }

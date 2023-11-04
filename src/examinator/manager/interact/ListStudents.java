@@ -26,29 +26,30 @@ public class ListStudents implements Interaction {
 
         String prompt = "Would you like to print the students list? [y/n] ";
         String responsePattern = "^[YyNn]$";
+        String wantsToPrint = getValidStringInput(prompt, responsePattern);
 
-        String userInput = getValidStringInput(prompt, responsePattern);
-
-        if (userInput.equals("y") || userInput.equals("Y")) {
-            StringBuilder summaryString = new StringBuilder();
-            for (Student student : exMan.getAllStudents()) {
-                summaryString.append(student);
-                summaryString.append("\n");
-            }
-
-            try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter("students_list.txt"));
-                writer.write(summaryString.toString());
-                writer.close();
-                System.out.println("SUCCESS - students saved in 'students_list.txt'");
-            } catch (
-                    IOException ie) {
-                System.out.println("ERROR - not able to write the students file.");
-                System.out.println(ie.getMessage());
-            }
-
-        }
+        if (wantsToPrint.equals("y") || wantsToPrint.equals("Y"))
+            createAndWriteSummary(exMan);
 
         return "main";
+    }
+
+    private void createAndWriteSummary(ExamManagement exMan) {
+        StringBuilder summaryString = new StringBuilder();
+        for (Student student : exMan.getAllStudents()) {
+            summaryString.append(student);
+            summaryString.append("\n");
+        }
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("students_list.txt"));
+            writer.write(summaryString.toString());
+            writer.close();
+            System.out.println("SUCCESS - students saved in 'students_list.txt'");
+        } catch (
+                IOException ie) {
+            System.out.println("ERROR - not able to write the students file.");
+            System.out.println(ie.getMessage());
+        }
     }
 }
