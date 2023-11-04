@@ -10,7 +10,7 @@ public class SortResultsMenu implements Interaction {
     String header = "SORT RESULTS\n";
     Menu menu = new Menu();
     String prompt = "Please choose a sort option: ";
-    String responsePattern = "^[hlaemx1-6]$";
+    String responsePattern = "^[hlaemxHLAEMX1-6]$";
 
     public SortResultsMenu() {
         menu.add(new MenuItem("Sort: high to low", "h"));
@@ -29,24 +29,24 @@ public class SortResultsMenu implements Interaction {
         String userInput = getValidStringInput(prompt, responsePattern);
 
         return switch (userInput) {
-            case "h", "1" -> {
+            case "h", "H", "1" -> {
                 Collections.sort(exMan.getExamResults());
                 yield "list-results";
             }
-            case "l", "2" -> {
+            case "l", "L", "2" -> {
                 Collections.sort(exMan.getExamResults(), Collections.reverseOrder());
                 yield "list-results";
             }
-            case "a", "3" -> {
-                exMan.syncResultLists();
+            case "a", "A", "3" -> {
+                exMan.resetFilter();
                 yield "list-results";
             }
-            case "e", "4" -> {
-                exMan.getExamResults("Essay");
+            case "e", "E", "4" -> {
+                exMan.filterExamResultsOutput("Essay");
                 yield "list-results";
             }
-            case "m", "5" -> {
-                exMan.getExamResults("Multiple choice");
+            case "m", "M", "5" -> {
+                exMan.filterExamResultsOutput("Multiple choice");
                 yield "list-results";
             }
             default -> "main";

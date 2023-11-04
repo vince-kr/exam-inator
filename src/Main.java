@@ -8,6 +8,10 @@ public class Main {
                 ===================""";
         System.out.println(banner);
 
+        /*
+        ExamManagement class owns collections of Student and ExamResult objects. It also
+        manages interaction with the user through CLI.
+        */
         ExamManagement exMan = new ExamManagement();
 
         // Start the main loop

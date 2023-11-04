@@ -47,7 +47,7 @@ public class ExamineStudent implements Interaction {
     private Student selectStudent(ArrayList<Student> allStudents) {
         String prompt = "Please enter the number corresponding to your student: ";
 
-        int choice = getValidInteger(prompt, 1, allStudents.size());
+        int choice = getValidPositiveInteger(prompt, allStudents.size());
         return allStudents.get(choice - 1);
     }
 

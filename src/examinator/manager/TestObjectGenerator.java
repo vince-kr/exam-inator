@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class TestObjectGenerator {
+    // Helper class to load some sample data for testing purposes
 
     public static void loadSampleData(ExamManagement exMan) {
         // Create and add six students
@@ -108,18 +109,4 @@ public abstract class TestObjectGenerator {
         // Helper method to load essay answers from persistence
         return Files.readAsset(type + "_essay.txt");
     }
-
-    /*
-    private static ArrayList<ExamResult> createExamResults(ArrayList<Student> students, ArrayList<Scorable> exams) {
-        ArrayList<ExamResult> examResults = new ArrayList<>();
-
-        for (int i = 0; i < exams.size(); i++) {
-            Student student = students.get(i / 2);
-            Scorable exam = exams.get(i);
-            examResults.add(new ExamResult(student, exam, exam.calculateScore()));
-        }
-
-        return examResults;
-    }
-     */
 }

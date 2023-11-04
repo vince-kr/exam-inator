@@ -2,19 +2,19 @@ package examinator.manager.interact;
 
 import examinator.manager.ExamManagement;
 import examinator.manager.TestObjectGenerator;
-import examinator.manager.interact.Interaction;
-import util.io.UserInput;
+
+import static util.io.UserInput.getValidStringInput;
 
 public class LoadSamples implements Interaction {
     String header = "LOAD SAMPLE DATA";
     String prompt = "This will load 6 students and 15 exams. Continue? [y/n] ";
-    String responsePattern = "^[ynYN]$";
+    String responsePattern = "^[YyNn]$";
 
     @Override
     public String transmitAndReceive(ExamManagement exMan) {
         System.out.println(header);
 
-        String userInput = UserInput.getValidStringInput(prompt, responsePattern);
+        String userInput = getValidStringInput(prompt, responsePattern);
 
         if (userInput.equals("y") || userInput.equals("Y")) {
             TestObjectGenerator.loadSampleData(exMan);

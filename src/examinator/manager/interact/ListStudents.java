@@ -24,7 +24,7 @@ public class ListStudents implements Interaction {
             System.out.println(student);
         }
 
-        String prompt = "Would you like to print the students list? [y/n] ";
+        String prompt = "Would you like to save the students list to file? [y/n] ";
         String responsePattern = "^[YyNn]$";
         String wantsToPrint = getValidStringInput(prompt, responsePattern);
 
