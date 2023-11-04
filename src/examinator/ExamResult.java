@@ -30,11 +30,14 @@ public class ExamResult implements Comparable<ExamResult> {
     public String toString() {
         return standardise(student.getStudentName(), 36) +
                 standardise(exam.getSubject(), 36) +
-                score;
+                exam.calculateScore();
     }
 
-    public String toString(int[] columnWidths) {
+    public String summaryResult() {
+        return standardise(exam.getSubject(), 36) + getScore();
+    }
 
+    public String detailedResult(int[] columnWidths) {
         return standardise(String.valueOf(exam.getExamId()), columnWidths[0]) +
                 standardise(exam.getSubject(), columnWidths[1]) +
                 standardise(String.valueOf(exam.getDuration()), columnWidths[2]) +

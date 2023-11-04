@@ -38,8 +38,10 @@ public class Student implements Printable {
         summaryResult.append("Exams taken: " + examsTaken.size() + "\n");
         summaryResult.append(standardise("SUBJECT", 36));
         summaryResult.append("SCORE\n");
+
         for (Scorable exam : examsTaken) {
-            summaryResult.append(exam + " " + exam.calculateScore() + "\n");
+            summaryResult.append(new ExamResult(this, exam).summaryResult());
+            summaryResult.append("\n");
         }
         return summaryResult.toString();
     }
@@ -54,7 +56,7 @@ public class Student implements Printable {
         detailedResult.append(headerLine(columnWidths));
 
         for (Scorable exam : examsTaken) {
-            detailedResult.append(new ExamResult(this, exam).toString(columnWidths));
+            detailedResult.append(new ExamResult(this, exam).detailedResult(columnWidths));
             detailedResult.append("\n");
         }
 
