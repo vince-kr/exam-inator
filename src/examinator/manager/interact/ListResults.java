@@ -10,14 +10,11 @@ public class ListResults implements Interaction {
     @Override
     public String transmitAndReceive(ExamManagement exMan) {
         String header = "LIST ALL RESULTS";
-        ArrayList<ExamResult> allResults = exMan.getExamResults();
 
-        Collections.sort(allResults);
-
-        for (ExamResult result : allResults) {
+        for (ExamResult result : exMan.getExamResults()) {
             System.out.println(result);
         }
 
-        return "main";
+        return "sort-options";
     }
 }
