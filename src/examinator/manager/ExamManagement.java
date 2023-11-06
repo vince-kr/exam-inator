@@ -13,7 +13,7 @@ public class ExamManagement {
     // Maintain two collections for ExamResults
     // allResultsInput contains all ExamResult objects in the order they are received
     ArrayList<ExamResult> allResultsInput = new ArrayList<>();
-    // allResultsOutput contains (a subset of) ExamResults with a certain sorting applied
+    // allResultsOutput contains ExamResults affected by sort and/or filter
     ArrayList<ExamResult> allResultsOutput = new ArrayList<>();
 
     // Interaction types form the backbone of interacting with the user through CLI
@@ -50,7 +50,8 @@ public class ExamManagement {
         /*
         Call transmitAndReceive to interact with the user, and get a reference to the next
         interaction back. Use this reference to look up & update the currentInteraction
-        field. Finally, if no interaction could be found, set isFinished to true.
+        field. Finally, if no interaction could be found (which should only happen when the
+        user chooses to exit), set isFinished to true.
         */
         System.out.println();
         String nextInteractionReference = currentInteraction.transmitAndReceive(this);
@@ -96,7 +97,7 @@ public class ExamManagement {
     }
 
     public void resetFilter() {
-        // Assign a fresh copy of the Input collection to Output to reset any filters
+        // Assign a fresh copy of the Input collection to Output to reset any sorts/filters
         allResultsOutput = new ArrayList<>(allResultsInput);
     }
 }

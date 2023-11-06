@@ -1,7 +1,7 @@
 package examinator.manager.interact;
 
 import examinator.manager.ExamManagement;
-import examinator.manager.TestObjectGenerator;
+import examinator.manager.TestObjectsGenerator;
 import util.io.UserInput;
 
 public class LoadSamples implements Interaction {
@@ -16,7 +16,7 @@ public class LoadSamples implements Interaction {
         String userInput = UserInput.getValidString(prompt, responsePattern);
 
         if (userInput.equals("y") || userInput.equals("Y")) {
-            TestObjectGenerator.loadSampleData(exMan);
+            TestObjectsGenerator.loadSampleData(exMan);
             System.out.println("Sample data loaded successfully!");
         }
 

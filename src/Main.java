@@ -18,5 +18,7 @@ public class Main {
         while(!exMan.userIsFinished()) {
             exMan.completeInteractionCycle();
         }
+
+        System.out.println("Thank you for using EXAM-INATOR!");
     }
 }

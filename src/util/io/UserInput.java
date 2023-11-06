@@ -51,7 +51,7 @@ public abstract class UserInput {
         }
 
         System.out.println("WARNING - your input '" + userInput + "' is not valid!");
-        return getValidPositiveInteger(prompt, max);
+        return getValidPositiveInteger(prompt, min, max);
     }
 
     public static int getValidPositiveInteger(String prompt, int max) {
@@ -61,6 +61,6 @@ public abstract class UserInput {
 
     public static int getValidPositiveInteger(String prompt) {
         // Like above, but no limits as long as it fits in memory
-        return getValidPositiveInteger(prompt, 0, Integer.MAX_VALUE);
+        return getValidPositiveInteger(prompt, 1, Integer.MAX_VALUE);
     }
 }

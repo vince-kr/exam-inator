@@ -22,13 +22,12 @@ public abstract class Files {
     }
 
     public static void writeStudentList(String toWrite) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("students_list.txt"));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(
+                "students_list.txt"))) {
             writer.write(toWrite);
             writer.close();
             System.out.println("SUCCESS - students saved in 'students_list.txt'");
-        } catch (
-                IOException ie) {
+        } catch (IOException ie) {
             System.out.println("ERROR - not able to write the students file.");
             System.out.println(ie.getMessage());
         }
