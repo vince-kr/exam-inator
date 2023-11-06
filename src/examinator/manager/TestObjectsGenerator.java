@@ -11,7 +11,7 @@ import util.io.Files;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class TestObjectGenerator {
+public abstract class TestObjectsGenerator {
     // Helper class to load some sample data for testing purposes
 
     public static void loadSampleData(ExamManagement exMan) {
